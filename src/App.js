@@ -1,4 +1,4 @@
-import Home from './components/home'
+import Home from './components/Home'
 import StyledApp from './styles/Appstyle'
 
 function App() {
