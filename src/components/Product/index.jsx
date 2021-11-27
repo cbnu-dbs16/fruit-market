@@ -77,10 +77,10 @@ const Product = () => {
                         alt={item.fruitname}
                         loading="lazy"
                         />
-                    <div className="iteminfo" style={{ margin: '10px 50px' }}>
+                    <div className="iteminfo" style={{ margin: '10px 50px', textAlign: 'center' }}>
                         {item.fruitname}
                     </div>
-                    <div className="iteminfo" style={{ margin: '10px 50px' }}>
+                    <div className="iteminfo" style={{ margin: '10px 50px', textAlign: 'center' }}>
                         {item.price}
                     </div>
                 </ImageListItem>
