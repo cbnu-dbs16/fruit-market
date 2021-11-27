@@ -1,39 +1,18 @@
 import React from "react";
 import Product from "../Product";
-import Tabs from '@mui/material/Tabs';
-import Tab from '@mui/material/Tab';
+import Mypage from "../Mypage";
 import { styled } from '@mui/system';
 import TabsUnstyled from '@mui/base/TabsUnstyled';
 import TabsListUnstyled from '@mui/base/TabsListUnstyled';
 import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
-import { buttonUnstyledClasses } from '@mui/base/ButtonUnstyled';
-import TabUnstyled, { tabUnstyledClasses } from '@mui/base/TabUnstyled';
-
-function LinkTab(props) {
-    return (
-      <Tab
-        component="a"
-        onClick={(event) => {
-          event.preventDefault();
-        }}
-        {...props}
-      />
-    );
-  }
+import TabUnstyled from '@mui/base/TabUnstyled';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import PersonIcon from '@mui/icons-material/Person';
 
 const Home = () => {
     const primary = {
         10: '#000',
-        50: '#F0F7FF',
-        100: '#C2E0FF',
-        200: '#80BFFF',
-        300: '#66B2FF',
-        400: '#3399FF',
-        500: '#007FFF',
-        600: '#0072E5',
-        700: '#0059B2',
-        800: '#004C99',
-        900: '#003A75',
+        700: '#0059B2'
       };
       
       const Tab = styled(TabUnstyled)`
@@ -48,25 +27,6 @@ const Home = () => {
         &.Mui-selected {
           color: ${primary[700]};
           font-weight: bold;
-        }
-      
-        &:hover {
-          color: #000;
-        }
-      
-        &.${buttonUnstyledClasses.focusVisible} {
-          color: #000;
-          outline: none;
-        }
-      
-        &.${tabUnstyledClasses.selected} {
-
-        }
-      
-        &.${buttonUnstyledClasses.disabled} {
-          opacity: 0.5;
-          cursor: not-allowed;
-          box-shadow: 0 0 0 0 rgba(0, 127, 255, 0);
         }
       `;
       
@@ -92,11 +52,13 @@ const Home = () => {
                 <TabsList>
                   <Tab>홈</Tab>
                   <Tab>과일 담기</Tab>
-                  <Tab>장바구니</Tab>
+                  <Tab><ShoppingCartIcon /></Tab>
+                  <Tab><PersonIcon /></Tab>
                 </TabsList>
                 <TabPanel value={0}>Home content</TabPanel>
                 <TabPanel value={1}><Product></Product></TabPanel>
                 <TabPanel value={2}>Basket content</TabPanel>
+                <TabPanel value={3}><Mypage></Mypage></TabPanel>
             </TabsUnstyled>
             
         </div>
