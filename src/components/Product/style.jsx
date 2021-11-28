@@ -7,6 +7,10 @@ const Product = styled.div`
     height: 100%;
     width: 100%;
     max-width: 30rem;
+    text-align: center;
+    .iteminfo{
+      
+    }
   }
 `
 
