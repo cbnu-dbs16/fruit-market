@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -10,87 +11,41 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import { styled } from '@mui/system';
-import TabsUnstyled from '@mui/base/TabsUnstyled';
-import TabsListUnstyled from '@mui/base/TabsListUnstyled';
-// import TabPanelUnstyled from '@mui/base/TabPanelUnstyled';
-import TabUnstyled from '@mui/base/TabUnstyled';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
-// import { Outlet } from "react-router";
 import { Link } from "react-router-dom"
 
 function App() {
-  const primary = {
-    10: '#000',
-    700: '#0059B2'
-  };
-  
-  const Tab = styled(TabUnstyled)`
-    color: ${primary[10]};
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 15px 20px;
-    border: none;
-    display: flex;
-    margin: auto;
-  
-    &.Mui-selected {
-      color: ${primary[700]};
-      font-weight: bold;
-    }
-  `;
-  
-  // const TabPanel = styled(TabPanelUnstyled)`
-  //   width: 100%;
-  //   margin: auto;
-  // `;
-  
-  const TabsList = styled(TabsListUnstyled)`
-    margin: auto;
-    border-radius: 8px;
-    box-shadow: 0 20px 25px rgba(0, 0, 0, 0.05), 0 10px 10px rgba(0, 0, 0, 0.02);
-    padding: 0 10px 0 10px;
-    margin-bottom: 10px;
-    display: flex;
-    align-content: space-between;
-  `;
+  const [activeNav, setActiveNav] = useState(1);
+
   return (
     <StyledApp>
       <BrowserRouter>    
       <div className="App">
-        <div className="navbar">
-          {/* <Logo/> */}Logo
-          <Link to="register">회원가입</Link>
-          <Link to="login">로그인</Link>
+        <div className="header">
+          <img src="/" className="logo_area"/>
+          <div className="account">
+            <Link to="register"><p>회원가입</p></Link>
+            <Link to="login"><p>로그인</p></Link>
+          </div>
         </div>
-        <div className="bar">
-          <TabsUnstyled defaultValue={0}>
-            <TabsList>
-              <Tab>
-                <Link to="home">홈</Link>
-              </Tab>
-              <Tab>
-                <Link to="product">과일 담기</Link>
-              </Tab>
-              <Tab>
-                <Link to="cart"><ShoppingCartIcon /></Link>
-              </Tab>
-              <Tab>
-                <Link to="mypage"><PersonIcon /></Link>
-              </Tab>
-            </TabsList>
-          </TabsUnstyled>
+        <div className="gnb">
+          <ul className="list_nav">
+            <li className="nav_item"><Link to="" className="nav-link" onClick={() => setActiveNav(1)}><p className={activeNav === 1 ? "nav_item active" : "nav_item"}>홈</p></Link></li>
+            <li className="nav_item"><Link to="product" className="nav-link" onClick={() => setActiveNav(2)}><p className={activeNav === 2 ? "nav_item active" : "nav_item"}>과일 담기</p></Link></li>
+            <li className="nav_item"><Link to="cart" className="nav-link" onClick={() => setActiveNav(3)}><p className={activeNav === 3 ? "nav_item active" : "nav_item"}><ShoppingCartIcon /></p></Link></li>
+            <li className="nav_item"><Link to="mypage" className="nav-link" onClick={() => setActiveNav(4)}><p className={activeNav === 4 ? "nav_item active" : "nav_item"}><PersonIcon /></p></Link></li>
+          </ul>
         </div>
-      </div>
-      <Routes>
-        <Route path="home" element={<Home />} />
-        <Route path="product" element={<Product />} />
-        <Route path="cart" element={<Cart />} />
-        <Route path="mypage" element={<Mypage />} />
-        <Route path="register" element={<Register />} />
-        <Route path="login" element={<Login />} />
-      </Routes>
+          <Routes>
+            <Route path="" element={<Home />} />
+            <Route path="product" exact element={<Product />} />
+            <Route path="cart" exact element={<Cart />} />
+            <Route path="mypage" exact element={<Mypage />} />
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+          </Routes>
+      </div>  
     </BrowserRouter>
     </StyledApp>
   );

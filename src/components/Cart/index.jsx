@@ -1,10 +1,10 @@
 import React from "react";
 
-const Basket = () => {
+const Cart = () => {
     return (
         <div className="container">
-            Basket
+            Cart
         </div>
     )
 }
-export default Basket;
+export default Cart;
