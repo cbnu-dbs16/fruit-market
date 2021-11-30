@@ -1,64 +1,110 @@
-import { React, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import * as React from 'react';
+import { useForm } from 'react-hook-form';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormControl from '@mui/material/FormControl';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { makeStyles } from '@mui/styles';
+import StyledLogin from './style';
+
+const useStyles = makeStyles({
+    root: {
+        margin: '100px auto',
+        width: '100%',
+    },
+    h1: {
+        fontSize: '28px',
+    },
+    loginbtn: {
+      background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+      border: 0,
+      borderRadius: 3,
+      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+      color: 'white',
+      fontSize: '18px',
+      height: 55,
+      padding: '0 30px',
+    },
+  });
 
 const Login = () => {
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    // formState: { errors },
-  } = useForm()
 
-//   const { isLoggedIn } = useSelector(state => state.auth)
-//   const dispatch = useDispatch()
+  const [values, setValues] = React.useState({
+    amount: '',
+    password: '',
+    weight: '',
+    weightRange: '',
+    showPassword: false,
+  });
 
-  const handleLogin = data => {
-    // console.log(data.userId, data.passWord)
-    // dispatch(login(data.userId, data.passWord))
-    //   .then(() => {
-    //     window.location.reload()
-    //   })
-    //   .catch(() => {
-    //   })
-  }
+  const handleChange = (prop) => (event) => {
+    setValues({ ...values, [prop]: event.target.value });
+  };
+
+  const handleClickShowPassword = () => {
+    setValues({
+      ...values,
+      showPassword: !values.showPassword,
+    });
+  };
+
+  const handleMouseDownPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const classes = useStyles();
 
   return (
-    <div className="container">
-      <div className="card card-container">
-        <form onSubmit={handleSubmit(handleLogin)}>
-          <div className="form-group">
-            <label htmlFor="userId">아이디</label>
-            <input
-              type="text"
-              className="form-control"
-              id="userId"
-              name="userId"
-              placeholder="아이디"
-              onChange={e => setValue('userId', e.target.value)}
-              //   onChange={onChangeUserid}
-              {...register('userId', { required: true })}
+    <div className={classes.root}>
+        <h1 className={classes.h1}>
+            로그인
+        </h1>
+        <FormControl sx={{ m: '20px 0px', width: '100%' }} variant="standard">
+        <TextField
+          id="standard-textarea"
+          className={classes.input}
+          label="아이디"
+          multiline
+          variant="standard"
+        />
+        </FormControl><br/>
+        <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
+            <InputLabel htmlFor="standard-adornment-password">비밀번호</InputLabel>
+            <Input
+              id="standard-adornment-password"
+              type={values.showPassword ? 'text' : 'password'}
+              value={values.password}
+              onChange={handleChange('password')}
+              endAdornment={
+                <InputAdornment position="end">
+                  <IconButton
+                    aria-label="toggle password visibility"
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                  >
+                    {values.showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              }
             />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="passWord">비밀번호</label>
-            <input
-              type="password"
-              className="form-control"
-              id="passWord"
-              name="passWord"
-              placeholder="비밀번호"
-              //   onChange={onChangePassword}
-              {...register('passWord', { required: true })}
-            />
-          </div>
-          <div className="form-group">
-            <button type="submit" value="Login" className="btn btn-primary btn-block">
-              <span>Login</span>
-            </button>
-          </div>
-        </form>
-      </div>
+        </FormControl>
+        <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
+            <Button variant="contained" className={classes.loginbtn}>로그인</Button>
+        </FormControl>
+        <StyledLogin>
+            <div className="accountservice">
+                <a href="" className="service_register">회원가입</a>
+                <div className="login_search">
+                    <a href="" id="search_id">아이디 찾기</a> |
+                    <a href="" id="search_pwd"> 비밀번호 찾기</a>
+                </div>
+            </div>
+        </StyledLogin>
     </div>
   )
 }
