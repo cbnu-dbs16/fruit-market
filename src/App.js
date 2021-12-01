@@ -37,6 +37,7 @@ function App() {
             <li className="nav_item"><Link to="mypage" className="nav-link" onClick={() => setActiveNav(4)}><p className={activeNav === 4 ? "nav_item active" : "nav_item"}><PersonIcon /></p></Link></li>
           </ul>
         </div>
+        <div className="container">
           <Routes>
             <Route path="" element={<Home />} />
             <Route path="product" exact element={<Product />} />
@@ -45,6 +46,7 @@ function App() {
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
           </Routes>
+        </div>
       </div>  
     </BrowserRouter>
     </StyledApp>

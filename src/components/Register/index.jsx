@@ -7,7 +7,13 @@ const Register = () => {
    
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input {...register("username")} />
+      <p>아이디</p>
+      <input type="text" {...register("userid")} />
+      <p>비밀번호</p>
+      <input type="password" {...register("userpwd")} />
+      <p>이름</p>
+      <input type="text" {...register("username")} />
+      <br/>
       <input type="submit" value="회원가입"/>
     </form>
   );
