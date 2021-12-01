@@ -8,7 +8,6 @@ const Register = styled.div`
     width: 100%;
     max-width: 30rem;
     text-align: center;
-
   }
 `
 
