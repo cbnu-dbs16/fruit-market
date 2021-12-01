@@ -15,7 +15,8 @@ import StyledLogin from './style';
 const useStyles = makeStyles({
     root: {
         margin: '100px auto',
-        width: '100%',
+        textAlign: 'center',
+        maxWidth: '30rem'
     },
     h1: {
         fontSize: '28px',
