@@ -37,11 +37,6 @@ const App = styled.div`
                 }
             }      
         }
-        .container{
-            margin: 0px auto;
-            max-width: 30rem;
-            text-align: center;
-        }
     } 
 `
 
