@@ -1,6 +1,7 @@
 import React from "react";
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
+import StyledProduct from './style';
 
 const Product = () => {
     const itemData = [
@@ -67,8 +68,9 @@ const Product = () => {
       ];
 
   return (
-      <div className="container">
-        <ImageList sx={{ width: 1000, height: 1000, margin: "auto" }} cols={3} rowHeight={250}>
+    <StyledProduct>
+      <div className="content">
+        <ImageList sx={{ width: '60rem', margin: "0px auto", textAlign: 'center', overflow: 'visible' }} cols={3} rowHeight={250}>
             {itemData.map((item) => (
                 <ImageListItem key={item.img} style={{ margin: '10px 50px'}}>
                     <img
@@ -86,7 +88,8 @@ const Product = () => {
                 </ImageListItem>
             ))}
         </ImageList>
-    </div>
+      </div>
+    </StyledProduct>
   );
 }
 
