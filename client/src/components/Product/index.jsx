@@ -1,92 +1,119 @@
-import React from "react";
+import React, { useState } from "react";
+// import Option from './style';
 import ImageList from '@mui/material/ImageList';
 import ImageListItem from '@mui/material/ImageListItem';
 import StyledProduct from './style';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import Optionitem from './option';
 
 const Product = () => {
-    const itemData = [
-        {
-          img: 'https://images.unsplash.com/photo-1551963831-b3b1ca40c98e',
-          fruitname: 'Breakfast',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d',
-          fruitname: 'Burger',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1522770179533-24471fcdba45',
-          fruitname: 'Camera',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c',
-          fruitname: 'Coffee',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1533827432537-70133748f5c8',
-          fruitname: 'Hats',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1558642452-9d2a7deb7f62',
-          fruitname: 'Honey',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1516802273409-68526ee1bdd6',
-          fruitname: 'Basketball',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f',
-          fruitname: 'Fern',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25',
-          fruitname: 'Mushrooms',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af',
-          fruitname: 'Tomato basil',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1',
-          fruitname: 'Sea star',
-          price: '1,000$'
-        },
-        {
-          img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6',
-          fruitname: 'Bike',
-          price: '1,000$'
-        },
-      ];
+      const [itemData, setItemData] = useState([{
+        img: 'https://user-images.githubusercontent.com/63364990/144433099-28fb1f9c-0027-4bab-be3f-20303dbc277c.png',
+        fruitname: 'Breakfast',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431391-039a362d-800e-40ff-95b6-fff43686c750.png',
+        fruitname: 'Burger',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431440-3c35aff5-9202-4cae-a37c-4311c576152c.png',
+        fruitname: 'Camera',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431444-3cde0cef-3cd7-4390-8ed0-f4482fbc43fb.png',
+        fruitname: 'Coffee',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431448-13ead1c7-35cc-4f1e-8dba-fe802b4a6e12.png',
+        fruitname: 'Hats',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431453-a34cd553-cb7d-4269-a15f-c7592a1d08d8.png',
+        fruitname: 'Honey',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431458-35ddd7a6-1cc4-4e8e-a5be-61b956b2d1a4.png',
+        fruitname: 'Basketball',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431471-bfb420cd-5410-4676-a860-18f0dbf4e6d8.png',
+        fruitname: 'Fern',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431486-9c5b2c3e-5e12-47c8-bce5-3a5d6fde4453.png',
+        fruitname: 'Mushrooms',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431494-47ff8ce0-13ae-453b-abad-4afc5cbcd730.png',
+        fruitname: 'Tomato basil',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431503-10e45bf4-cf9c-4e88-b2bc-1fd71b16c00f.png',
+        fruitname: 'Sea star',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      },
+      {
+        img: 'https://user-images.githubusercontent.com/63364990/144431508-fb08152f-e073-4bd8-ab9b-9b110190d940.png',
+        fruitname: 'Bike',
+        price: 1000,
+        description : '소개',
+        expiredate: '',
+        count: 1
+      }]);
 
   return (
     <StyledProduct>
       <div className="content">
-        <ImageList sx={{ width: '60rem', margin: "0px auto", textAlign: 'center', overflow: 'visible' }} cols={3} rowHeight={250}>
-            {itemData.map((item) => (
-                <ImageListItem key={item.img} style={{ margin: '10px 50px'}}>
-                    <img
-                        src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
-                        srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
-                        alt={item.fruitname}
-                        loading="lazy"
-                        />
-                    <div className="iteminfo" style={{ margin: '10px 50px', textAlign: 'center' }}>
-                        {item.fruitname}
-                    </div>
-                    <div className="iteminfo" style={{ margin: '10px 50px', textAlign: 'center' }}>
-                        {item.price}
-                    </div>
-                </ImageListItem>
-            ))}
+        <ImageList sx={{ width: '70rem', margin: "-55px auto", textAlign: 'center', overflow: 'visible' }} cols={3} rowHeight={250}>
+          {itemData.map(function(item){
+            return(
+              <Optionitem key={item.fruitname} item={item}/>
+            )
+            }
+          )}
         </ImageList>
       </div>
     </StyledProduct>
