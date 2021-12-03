@@ -1,21 +1,17 @@
 import React, { useState } from "react";
 import DaumPostcode from 'react-daum-postcode';
-import { Checkbox } from 'antd';
-import { Controller, useForm } from "react-hook-form";
 import { makeStyles } from '@mui/styles';
 import Button from '@mui/material/Button';
 import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import SearchIcon from '@mui/icons-material/Search';
-// import { yupResolver } from '@hookform/resolvers/yup';
-// import { signupValidation } from 'src/yup';
+import { RegisterUser } from '../../action/users';
 
 const useStyles = makeStyles({
   root: {
       margin: '100px auto',
       textAlign: 'center',
       maxWidth: '30rem',
-      // zIndex: '0'
   },
   h1: {
       fontSize: '28px',
@@ -42,16 +38,20 @@ const useStyles = makeStyles({
 });
 
 const Register = () => {
-  const [user, setuser] = useState({
+  const [user, setUser] = useState({
     userid: '',
     userpwd: '',
     username: '',
     userphonenum: '',
     useremail: '',
-    useraddr: ''
+    useraddr: {
+      city: '',
+      gu: '',
+      dong: '',
+      jibun: ''
+    }
   })
-  const [address, setAddress] = useState(''); // 주소
-  const [addressDetail, setAddressDetail] = useState(''); // 상세주소   
+
   const [isOpenPost, setIsOpenPost] = useState(false);
   const [isInputPost, setIsInputPost] = useState(false);
 
@@ -61,21 +61,16 @@ const Register = () => {
   };
 
   const onCompletePost = (data) => {
-    let fullAddr = data.address;
-    let extraAddr = '';
-
-    if (data.addressType === 'R') {
-      if (data.bname !== '')
-        extraAddr += data.bname;
-      if (data.buildingName !== '')
-        extraAddr += extraAddr !== '' ? `, ${data.buildingName}` : data.buildingName;
-      fullAddr += extraAddr !== '' ? ` (${extraAddr})` : '';
-    }
-    setAddress(data.zonecode);
-    setAddressDetail(fullAddr);
+    console.log(data);
+    const jibunaddr = data.jibunAddress.match(/[0-9|-]/g).join('');
+    console.log(jibunaddr);
+    setUser({...user, useraddr: {
+      city: data.sido,
+      gu: data.sigungu,
+      dong: data.bname,
+      jibun: jibunaddr}});
     setIsOpenPost(false);
     setIsInputPost(true);
-    console.log(data);
   };
 
   const postCodeStyle = {
@@ -84,27 +79,32 @@ const Register = () => {
     textAlign: 'center',
   };
 
-  const { handleSubmit, errors, control } = useForm({
-    //  resolver: yupResolver(signUpValidation),
-     mode: 'onBlur',
-   });
-  // const onSubmit = handleSubmit((data) => {
-  //   console.log(data);
-  // });
+  const handleRegister = e => {
+    e.preventDefault();
+    console.log(user);
+    RegisterUser(user)
+      .then(e => {
+            console.log(e)
+      })
+      .catch(e => {
+            console.log(e)
+      })
+  };
 
   const classes = useStyles();
 
   return (
     <div className={classes.root} id="modal">
+      <form onSubmit={handleRegister}>
       <h1 className={classes.h1}>회원가입</h1>
       <hr className={classes.hr} />
       <p className={classes.p}>아이디</p>
       <FormControl sx={{ m: '20px 0px', width: '100%' }} variant="standard">
-        <OutlinedInput placeholder="아이디를 입력해주세요." />
+        <OutlinedInput onChange={(e)=>{setUser({...user, userid: e.target.value})}} placeholder="아이디를 입력해주세요." />
       </FormControl><br/>
       <p className={classes.p}>비밀번호</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <OutlinedInput placeholder="비밀번호를 입력해주세요." />
+        <OutlinedInput onChange={(e)=>{setUser({...user, userpwd: e.target.value})}} placeholder="비밀번호를 입력해주세요." />
       </FormControl>
       <p className={classes.p}>비밀번호 확인</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
@@ -112,41 +112,31 @@ const Register = () => {
       </FormControl>
       <p className={classes.p}>이름</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <OutlinedInput placeholder="이름을 입력해주세요." />
+        <OutlinedInput onChange={(e)=>{setUser({...user, username: e.target.value})}} placeholder="이름을 입력해주세요." />
       </FormControl>
       <p className={classes.p}>전화번호</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <OutlinedInput placeholder="'-'제외하고 숫자만 입력" />
+        <OutlinedInput onChange={(e)=>{setUser({...user, userphonenum: e.target.value})}} placeholder="'-'제외하고 숫자만 입력" />
       </FormControl>
       <p className={classes.p}>이메일</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <OutlinedInput placeholder="이메일을 입력해주세요." />
+        <OutlinedInput onChange={(e)=>{setUser({...user, useremail: e.target.value})}} placeholder="이메일을 입력해주세요." />
       </FormControl>
       <p className={classes.p}>주소</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-      {isInputPost ? (<OutlinedInput defaultValue={addressDetail} />): null}
+      {isInputPost ? (
+          <OutlinedInput defaultValue={user.useraddr.city+" "+user.useraddr.gu+" "+user.useraddr.dong+" "+user.useraddr.jibun} style={{width: '100%'}}/>): null}
+        {/* <OutlinedInput onChange={(e)=>{
+            setUser({...user, useraddr: {extra: e.target.value}})}} placeholder="상세주소" style={{width: '100%'}}/> */}
         <Button variant="outlined" startIcon={<SearchIcon />} onClick={onChangeOpenPost}>주소검색</Button>
       </FormControl>
       <div>
         {isOpenPost ? (<DaumPostcode style={postCodeStyle} autoClose onComplete={onCompletePost} />): null}
       </div>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <Button variant="contained" className={classes.registerbtn}>회원가입</Button>
+        <Button type="submit" variant="contained" className={classes.registerbtn}>회원가입</Button>
       </FormControl>
-        {/* <Controller
-          name="term"
-          control={control}
-          defaultValue={false}
-          render={({ onChange, value }) => (
-            <Checkbox
-              onChange={e => onChange(e.target.checked)}
-              checked={value}
-            >
-              약관에 동의합니다.
-            </Checkbox>
-          )}
-        /> */}
-        {/* {errors.term && <FormErrorMessage errorMessage={errors.term.message} />} */}
+      </form>
     </div>
   );
 }
