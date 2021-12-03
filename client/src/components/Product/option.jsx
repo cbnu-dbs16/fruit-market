@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Option from './style';
-import Optionstyle from './style';
+// import Optionstyle from './style';
 import ImageListItem from '@mui/material/ImageListItem';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import { AddFriut } from '../../action/carts';
 
 function Optionitem(props){
     const [item, setItemData] = useState({...props.item});
@@ -15,6 +16,18 @@ function Optionitem(props){
         if(item.count >= 1)
             setItemData({...item, count: item.count + 1, price: (item.price / item.count) * (item.count + 1)});
     }
+    const handleAddcart = () => {
+        // const item = {
+        //     userid: , 
+        //     itemid: }
+        // AddFriut(item)
+        // .then(e => {
+        //     console.log(e)
+        // })
+        // .catch(e => {
+        //     console.log(e)
+        // })
+    }
     return (
         <div className="option">
             <div className="quantity">
@@ -26,7 +39,7 @@ function Optionitem(props){
                 </span>
             </Option>
             </div>
-            <div className="carticon">
+            <div className="carticon" onClick={handleAddcart}>
             <AddShoppingCartIcon />
             </div>
             <ImageListItem key={item.img} style={{ margin: '120px 5px'}}>
