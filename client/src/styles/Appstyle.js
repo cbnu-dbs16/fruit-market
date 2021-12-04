@@ -2,11 +2,8 @@ import styled from 'styled-components'
 
 const App = styled.div`
     .App{
-        // position: relative;
-        min-width: 1050px;
-        max-width: 1500px;
+        width: 100vw;
         background-color: #fff;
-        margin: 0px auto;
         .header{
             .logo{
                 float :left;
@@ -18,21 +15,24 @@ const App = styled.div`
         .gnb {
             background-color: white;
             text-align: center;
-            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 28px 0px;
+            position: relative;
+            width: 100vw;
+            z-index: 10;
+            box-shadow: rgba(100, 100, 111, 0.1) 0px 5px 5px 0px;
             .list_nav{
                 display: block;
                 margin: 1em auto;
                 .nav_item {
                     color: black;
                     display: inline-flex;
-                    margin: 10px 80px;
+                    margin: 10px 50px;
                     text-align: center;
                     .nav {
                       font-size: 1rem;
                     }
                 }
                 .active{
-                    color: #14148C;
+                    color: #1E82CD;
                     font-weight: bold;
                 }
             }      
