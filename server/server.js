@@ -84,6 +84,20 @@ app.get('/api/fruits', (req,res) => {
     })
 })
 
+app.get('/api/fruits/detail', (req,res) => {
+    var sql = 'SELECT * FROM fruits WHERE fno = ?';
+    var params = [req.query.fno];
+    console.log(sql);
+    console.log(req.query);
+    conn.query(sql,params,  function (err, rows, fields){
+        if(err) console.log('Load fruits failed..' + err);
+        else{
+            console.log('sql 결과 : '+JSON.stringify(rows))
+            if(rows) res.send(rows);
+        }
+    })
+})
+
 app.delete('/api/cart', (req,res) => {
     var body = req.body;
     var sql = 'DELETE FROM cart WHERE id=? and Fno=?';
@@ -94,57 +108,12 @@ app.delete('/api/cart', (req,res) => {
     })
 })
 
-app.get('/api/fruits/like', (req, res) => {
-    //console.log(body);
-    var sql = 'SELECT * FROM cart WHERE cus_id = ? and fno = ?';
-    var params = [req.query.cusid, parseInt(req.query.fno)];
-    console.log(sql);
-    console.log(req.query);
-    conn.query(sql,params, function (err, rows, fields){
-        if(err) console.log('Load cart like failed..' + err);
-        else{
-            console.log('sql 결과 : '+JSON.stringify(rows))
-            res.send(rows);
-        }
-    })
-})
-
-app.get('/api/cartfruits', (req,res) => {
-    var sql = 'SELECT * FROM fruits WHERE fno = ?';
-    var params = [req.query.fno];
-    console.log(sql);
-    console.log(req.query);
-    conn.query(sql,params, function (err, rows, fields){
-        if(err) console.log('Load cart fruits failed..' + err);
-        else{
-            console.log('sql 결과 : '+JSON.stringify(rows))
-            if(rows) res.send(rows);
-        }
-    })
-})
-
 app.get('/api/cartList', (req,res) => {
-    var sql = 'SELECT * FROM cart WHERE cus_id = ?';
+    var sql = 'SELECT * FROM cart WHERE cus_id = ? and fno= ?';
     console.log(sql);
     var params = [req.query.id];
     conn.query(sql,params,  function (err, rows, fields){
         if(err) console.log('Load cart failed..' + err);
-        else{
-            console.log('sql 결과 : '+JSON.stringify(rows))
-            if(rows) res.send(rows);
-        }
-    })
-})
-
-app.put('/api/fruits', (req, res) => {
-    //console.log(body);
-    var sql = 'UPDATE fruits SET state = ? WHERE fno = ?';
-    var params = [false, req.query.fno];
-    console.log(sql);
-    console.log(params);
-    console.log(req.query);
-    conn.query(sql,params, function (err, rows, fields){
-        if(err) console.log('Fruits state update failed..' + err);
         else{
             console.log('sql 결과 : '+JSON.stringify(rows))
             if(rows) res.send(rows);
