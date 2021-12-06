@@ -138,4 +138,5 @@ app.post('/api/cart', (req, res) => {
     })
 })
 
+app.use(cors({ origin: "http://localhost:3000/" }))
 app.listen(port, () => {console.log(`Listening on port ${port}`)});
