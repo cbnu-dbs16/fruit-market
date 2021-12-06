@@ -1,16 +1,15 @@
 const express = require('express');
+const app = express();
+const api = require('./routes/index');
 const db_config   = require('./config/database.js');
 const bodyParser = require('body-parser');
 const conn = db_config.init();
-const jwt = require('jsonwebtoken');
-var cors = require('cors');
 
-const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended : true}));
-
+app.use('/api', api);
 
 app.post('/api/Customer', (req, res) => {
     var body = req.body;
@@ -138,5 +137,7 @@ app.post('/api/cart', (req, res) => {
     })
 })
 
-app.use(cors({ origin: "http://localhost:3000/" }))
+var cors = require('cors');
+app.use(cors());
+
 app.listen(port, () => {console.log(`Listening on port ${port}`)});
