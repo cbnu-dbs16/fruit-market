@@ -103,20 +103,20 @@ const Product = () => {
       }]);
 
       useEffect(()=>{
-        // GetList()
-        // .then(e => {
-        //   console.log(e);
-        //   setItemData({...itemData, 
-        //   img: ,
-        //   fruitname: ,
-        //   price: ,
-        //   description : ,
-        //   expiredate: ,
-        //   count: });
-        // })
-        // .catch(e => {
-        //   console.log(e);
-        // })
+        GetList()
+        .then(e => {
+          console.log(e);
+          // setItemData({...itemData, 
+          // img: ,
+          // fruitname: ,
+          // price: ,
+          // description : ,
+          // expiredate: ,
+          // count: });
+        })
+        .catch(e => {
+          console.log(e);
+        })
       })
 
   return (
