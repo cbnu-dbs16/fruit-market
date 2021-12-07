@@ -10,6 +10,22 @@ const App = styled.div`
             }
             .account{
                 float: right;
+                p{
+                    padding: 0 8px;
+                }
+                ul{
+                    display: flex;
+                    margin: 12px 12px 0 0;
+                }
+                li{
+                    :after {
+                        content: "";
+                        float: right;
+                        width: 1px;
+                        height: 13px;
+                        background-color: #d8d8d8;
+                    }
+                }
             }
         }
         .gnb {
