@@ -20,13 +20,13 @@ function Optionitem(props){
         // const item = {
         //     userid: , 
         //     itemid: }
-        // AddFriut(item)
-        // .then(e => {
-        //     console.log(e)
-        // })
-        // .catch(e => {
-        //     console.log(e)
-        // })
+        AddFriut(item)
+        .then(e => {
+            console.log(e)
+        })
+        .catch(e => {
+            console.log(e)
+        })
     }
     return (
         <div className="option">
@@ -49,7 +49,7 @@ function Optionitem(props){
                         <p>{item.fruitname}</p>
                     </div>
                     <div className="itemprice" style={{ float : 'left', margin: '15px 0px'}}>
-                    <p>{item.price}$</p>
+                    <p>{item.price}원</p>
                     </div>
                 </ImageListItem>
             </Link>
