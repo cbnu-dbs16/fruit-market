@@ -17,7 +17,7 @@ app.post('/api/Customer', (req, res) => {
     console.log(body);
 
     var sql = 'INSERT INTO Customer VALUES(?, ?, ?, ?, ?, ?)';
-    var params = [body.id, body.password, body.username];
+    var params = [body.Cno, body.username, body.email, body.cus_id,body.cus_password, body.PhoneNumber];
     console.log(sql);
     conn.query(sql, params, function(err){
         if(err) console.log('Insertion failed.. ' + err);
@@ -28,7 +28,7 @@ app.post('/api/Customer', (req, res) => {
 app.get('/api/Customer', (req, res) => {
     //console.log(body);
     var sql = 'SELECT * FROM Customer WHERE cus_id = ? and cus_password = ?';
-    var params = [req.query.id, req.query.password];
+    var params = [req.query.cus_id, req.query.cus_password];
     console.log(sql);
     
     conn.query(sql,params, function (err, rows, fields){
@@ -138,4 +138,10 @@ app.post('/api/cart', (req, res) => {
     })
 })
 
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+    methods: 'GET, POST'
+  }));
+  
 app.listen(port, () => {console.log(`Listening on port ${port}`)});

@@ -8,7 +8,7 @@ DROP TABLE fruits;
 DROP TABLE cart;
 DROP TABLE comments;
 
--- Customer 
+-- Customer --
 CREATE TABLE Customer(
    Cno               int      NOT NULL PRIMARY KEY,
    username          varchar(45),
