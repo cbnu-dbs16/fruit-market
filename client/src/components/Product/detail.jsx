@@ -24,7 +24,7 @@ const ProductDetail = () => {
         await GetDetailItem(itemname.name)
         .then(e => {
             console.log(e)
-            setItem({...item, img: e.img, fruitname: e.fruitname, price: e.price, expiredate: e.expiredate, count: e.count});
+            // setItem({...item, img: e.img, fruitname: e.fruitname, price: e.price, expiredate: e.expiredate, count: e.count});
         })
         .catch(e => {
             console.log(e)
