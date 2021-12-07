@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Bringcartlist } from "../../action/carts";
 import StyledCart from './style';
 import EachItem from './eachitem';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 const Cart = () => {
     const [itemincart, setitemincart] = useState([{
@@ -42,30 +44,46 @@ const Cart = () => {
     //     price: 0,
     //     count: 0,
     // }]);
+    const [select, setselect] = useState(1);
 
     useEffect(()=>{
-        // Bringcartlist()
-        // .then(e => {
-        //     console.log(e);
-        //     setitemincart({...itemincart, 
-        //         img: '',
-        //         itemname: '',
-        //         price: 0,
-        //         count: 0, });
-        // })
-        // .catch(e => {
-        //     console.log(e);
-        // })
+        Bringcartlist()
+        .then(e => {
+            console.log(e);
+            // setitemincart({...itemincart, 
+            //     img: '',
+            //     itemname: '',
+            //     price: 0,
+            //     count: 0, });
+        })
+        .catch(e => {
+            console.log(e);
+        })
     })
+    const selectitem = () => {
+      setselect(!select);
+    }
 
     return (
         <StyledCart>
             <div className="content">
-                <div className="listincart">
-                    {itemincart.map((item)=>
-                        <EachItem key={item.itemname} item={item}/>
-                    )}
+              <h2 className="tit">장바구니</h2>
+              <div className="cart_select">
+                <div className="inner_select">
+                  <label className="check">
+                    {select ? <CheckCircleIcon onClick={selectitem} style={{ padding: '0 20px 0 0'}}/> : <CheckCircleOutlineIcon onClick={selectitem} style={{ padding: '0 20px 0 0'}}/>}
+                    전체선택
+                  </label>
+                  <span>|</span>
+                  <a href="#none" className="btn_delete">선택삭제</a>
                 </div>
+                {/* <hr /> */}
+              </div>
+              <div className="listincart">
+                  {itemincart.map((item)=>
+                      <EachItem key={item.itemname} item={item} select={select}/>
+                  )}
+              </div>
             </div>
         </StyledCart>
     )
