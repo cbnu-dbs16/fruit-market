@@ -15,7 +15,6 @@ import {
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link } from "react-router-dom";
-// import logo from 'styles/logo.png'
 
 function App() {
   const [activeNav, setActiveNav] = useState(1);
@@ -25,7 +24,7 @@ function App() {
       <BrowserRouter>    
       <div className="App">
         <div className="header">
-          {/* <img src={'styles/logo.png'} className="logo_area" alt="logo"/> */}
+          <img src="mainlogo.png" className="logo_area" width={150} height={55} alt="logo"/>
           <div className="account">
             <ul className="list_menu">
               <li class="menu menu_join">
@@ -39,10 +38,6 @@ function App() {
               </li>
             </ul>
           </div>
-          {/* <div className="account">
-            <Link to="register"><p>회원가입</p></Link>
-            <Link to="login"><p>로그인</p></Link>
-           */}
         </div>
         <div className="gnb">
           <ul className="list_nav">
