@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { StyledEachItem, Option } from './style';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { DeleteFruit } from '../../action/carts';
 
 function EachItem(props){
     const [item, setItem] = useState({...props.item});
-    console.log(item);
+    const [select, setselect] = useState(props.select);
+    // console.log(item);
     const decreasecnt = () => {
         if(item.count > 1)
             setItem({...item, count: item.count - 1, price: (item.price / item.count) * (item.count - 1)});
@@ -12,14 +17,26 @@ function EachItem(props){
         if(item.count >= 1)
             setItem({...item, count: item.count + 1, price: (item.price / item.count) * (item.count + 1)});
     }
+    const selectitem = () => {
+        setselect(!select);
+    }
+    const deleteitem = () => {
+        // DeleteFruit(item)
+        // .then(e => {
+        //     console.log(e);
+        // })
+        // .catch(e => {
+        //     console.log(e);
+        // })
+    }
     return (
         <StyledEachItem>
         <div className="content">
             <ul className="incartlist">
                 <li>
                     <div className="item">
-                        <label className="check" for="chkItemdad2a005-818f-49cd-a784-ca1a626f9f83">
-                            <input type="checkbox" id="chkItemdad2a005-818f-49cd-a784-ca1a626f9f83" name="chkItem" data-item-id="dad2a005-818f-49cd-a784-ca1a626f9f83" data-item-no="69371" data-item-parent-no="69371" checked="" />
+                        <label className="check">
+                            {select ? <CheckCircleIcon onClick={selectitem}/> : <CheckCircleOutlineIcon onClick={selectitem}/>}
                         </label>
                         <img src={item.img} width={120} height={120}/>
                         <div className="inner_name">
@@ -34,7 +51,7 @@ function EachItem(props){
                             <span className="selling" style={{border: '0'}}>{item.price}원</span>
                         </div>     
                     </div>
-                    <button type="button" className="btn_delete">상품 삭제</button>
+                    <button type="button" className="btn_delete"><DeleteIcon onClick={deleteitem()}/></button>
                 </li>
             </ul>
         </div>
