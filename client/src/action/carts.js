@@ -23,8 +23,7 @@ export const DeleteFruit = async item => {
 
 export const Bringcartlist = async item => {
     try {
-      console.log(item);
-      const res = await CartService.cartlist(item);
+      const res = await CartService.cartlist(1);
       console.log(res);
       return Promise.resolve(res.data.data);
     } catch (err) {
