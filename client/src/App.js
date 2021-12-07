@@ -14,7 +14,8 @@ import {
 } from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+// import logo from 'styles/logo.png'
 
 function App() {
   const [activeNav, setActiveNav] = useState(1);
@@ -24,11 +25,24 @@ function App() {
       <BrowserRouter>    
       <div className="App">
         <div className="header">
-          <img src="/" className="logo_area"/>
+          {/* <img src={'styles/logo.png'} className="logo_area" alt="logo"/> */}
           <div className="account">
+            <ul className="list_menu">
+              <li class="menu menu_join">
+                <Link to="register" style={{padding: '0 11px 0 11px', color: '#5f0080'}}>회원가입</Link>
+              </li>
+              <li class="menu menu_login">
+                <Link to="login" style={{padding: '0 11px 0 11px'}}>로그인</Link>
+              </li>
+              <li class="menu menu_center">
+                <a href="#" style={{padding: '0 11px 0 11px'}}>고객센터</a>
+              </li>
+            </ul>
+          </div>
+          {/* <div className="account">
             <Link to="register"><p>회원가입</p></Link>
             <Link to="login"><p>로그인</p></Link>
-          </div>
+           */}
         </div>
         <div className="gnb">
           <ul className="list_nav">
