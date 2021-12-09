@@ -37,19 +37,18 @@ CREATE TABLE fruits(
  ALTER TABLE fruits ADD UNIQUE KEY (fno);
  
 CREATE TABLE cart(
-    cart_id                int      Not NULL PRIMARY KEY,  -- 장바구니 번호 -- 
-    fk_cus_id              varchar(45),                    -- 고객 아이디 --
-    fk_fname               varchar(45),                    -- 과일이름 가져오기 -- 
+    cart_id                int      Not NULL PRIMARY KEY,  -- 장바구니 번호 
+    fk_cus_id              varchar(45),                    -- 고객 아이디 
+    fk_fno                 int,                           -- 과일정보 가져오기 
     CONSTRAINT FK_Customer FOREIGN KEY (fk_cus_id) REFERENCES Customer(cus_id),
-    CONSTRAINT FK_fruits   FOREIGN KEY (fk_Fname) REFERENCES fruits(fname)
-);
+    CONSTRAINT FK_info_fruits   FOREIGN KEY (fk_Fno) REFERENCES fruits(fno)
 
  -- comments 
  CREATE TABLE comments(
     com_id                    INT         NOT NULL PRIMARY KEY,
     comment                   varchar(100),  -- 후기 내용
-    fk_fno                    int ,          -- 과일정보 가져오기 
-    CONSTRAINT FK_infofruits  FOREIGN KEY (fk_fno) REFERENCES fruits(fno)
+    fk_fname                  varchar(45) ,          -- 과일이름 가져오기 
+    CONSTRAINT FK_fruits  FOREIGN KEY (fk_fname) REFERENCES fruits(fname)
  );
  
 
