@@ -4,8 +4,12 @@ import StyledCart from './style';
 import EachItem from './eachitem';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Button from '@mui/material/Button';
+import btnStyles from "../../styles/Btnstyle";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
+  const btnstyle = btnStyles();
     const [itemincart, setitemincart] = useState([{
         img: 'https://user-images.githubusercontent.com/63364990/144433099-28fb1f9c-0027-4bab-be3f-20303dbc277c.png',
         fruitname: 'Breakfast',
@@ -83,6 +87,11 @@ const Cart = () => {
                   {itemincart.map((item)=>
                       <EachItem key={item.itemname} item={item} select={select}/>
                   )}
+              </div>
+              <div className="goorder">
+                <Link to="/order">
+                  <Button type="submit" variant="contained" className={btnstyle.btn}>주문하기</Button>
+                </Link>
               </div>
             </div>
         </StyledCart>
