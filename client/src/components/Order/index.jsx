@@ -19,7 +19,7 @@ const Order = () => {
 
     return (
         <div className="content">
-            <h2 className="tit">주문하기</h2>
+            <h2 className="tit">주문서</h2>
         </div>
     )
 }
