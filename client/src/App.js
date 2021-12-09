@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Product from './components/Product';
 import Detail from './components/Product/detail';
 import Cart from './components/Cart';
+import Order from './components/Order';
 import Mypage from './components/Mypage';
 import StyledApp from './styles/Appstyle';
 import {
@@ -53,6 +54,7 @@ function App() {
             <Route path="product" exact element={<Product />} />
             <Route path="detail/:name" exact element={<Detail />} />
             <Route path="cart" exact element={<Cart />} />
+            <Route path="order" exact element={<Order />} />
             <Route path="mypage" exact element={<Mypage />} />
             <Route path="register" element={<Register />} />
             <Route path="login" element={<Login />} />
