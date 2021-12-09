@@ -11,6 +11,7 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { makeStyles } from '@mui/styles';
 import StyledLogin from './style';
+import btnStyles from "../../styles/Btnstyle";
 
 const useStyles = makeStyles({
     root: {
@@ -21,19 +22,10 @@ const useStyles = makeStyles({
     h1: {
         fontSize: '28px',
     },
-    loginbtn: {
-      background: 'linear-gradient(45deg, #A814E7 30%, #288CD2 92%)',
-      border: 0,
-      borderRadius: 3,
-      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-      color: 'white',
-      fontSize: '18px',
-      height: 55,
-      padding: '0 30px',
-    },
   });
 
 const Login = () => {
+  const btnstyle = btnStyles();
 
   const [values, setValues] = React.useState({
     amount: '',
@@ -95,7 +87,7 @@ const Login = () => {
             />
         </FormControl>
         <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-            <Button variant="contained" className={classes.loginbtn}>로그인</Button>
+            <Button variant="contained" className={btnstyle.btn}>로그인</Button>
         </FormControl>
         <StyledLogin>
             <div className="accountservice">
