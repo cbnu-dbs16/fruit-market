@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import SearchIcon from '@mui/icons-material/Search';
 import { RegisterUser } from '../../action/users';
+import btnStyles from "../../styles/Btnstyle";
 
 const useStyles = makeStyles({
   root: {
@@ -21,16 +22,6 @@ const useStyles = makeStyles({
     border: '0px',
     backgroundColor: '#000',
     margin: '2em 0'
-  },
-  registerbtn: {
-    background: 'linear-gradient(45deg, #A814E7 30%, #288CD2 92%)',
-    border: 0,
-    borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: 'white',
-    fontSize: '18px',
-    height: 55,
-    padding: '0 30px',
   },
   p: {
     float: 'left'
@@ -92,6 +83,7 @@ const Register = () => {
   };
 
   const classes = useStyles();
+  const btnstyle = btnStyles();
 
   return (
     <div className={classes.root} id="modal">
@@ -134,7 +126,7 @@ const Register = () => {
         {isOpenPost ? (<DaumPostcode style={postCodeStyle} autoClose onComplete={onCompletePost} />): null}
       </div>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <Button type="submit" variant="contained" className={classes.registerbtn}>회원가입</Button>
+        <Button type="submit" variant="contained" className={btnstyle.btn}>회원가입</Button>
       </FormControl>
       </form>
     </div>
