@@ -63,7 +63,7 @@ const Cart = () => {
         .catch(e => {
             console.log(e);
         })
-    })
+    }, [])
     const selectitem = () => {
       setselect(!select);
     }
