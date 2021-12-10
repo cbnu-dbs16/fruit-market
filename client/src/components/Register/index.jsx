@@ -34,13 +34,10 @@ const Register = () => {
     userpwd: '',
     username: '',
     userphonenum: '',
-    useremail: '',
-    useraddr: {
-      city: '',
-      gu: '',
-      dong: '',
-      jibun: ''
-    }
+    city: '',
+    gu: '',
+    dong: '',
+    jibun: ''
   })
 
   const [isOpenPost, setIsOpenPost] = useState(false);
@@ -55,11 +52,11 @@ const Register = () => {
     console.log(data);
     const jibunaddr = data.jibunAddress.match(/[0-9|-]/g).join('');
     console.log(jibunaddr);
-    setUser({...user, useraddr: {
+    setUser({...user,
       city: data.sido,
       gu: data.sigungu,
       dong: data.bname,
-      jibun: jibunaddr}});
+      jibun: jibunaddr});
     setIsOpenPost(false);
     setIsInputPost(true);
   };
@@ -75,10 +72,10 @@ const Register = () => {
     console.log(user);
     RegisterUser(user)
       .then(e => {
-            console.log(e)
+        console.log(e)
       })
       .catch(e => {
-            console.log(e)
+        console.log(e)
       })
   };
 
@@ -117,7 +114,7 @@ const Register = () => {
       <p className={classes.p}>주소</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
       {isInputPost ? (
-          <OutlinedInput defaultValue={user.useraddr.city+" "+user.useraddr.gu+" "+user.useraddr.dong+" "+user.useraddr.jibun} style={{width: '100%'}}/>): null}
+          <OutlinedInput defaultValue={user.city+" "+user.gu+" "+user.dong+" "+user.jibun} style={{width: '100%'}}/>): null}
         {/* <OutlinedInput onChange={(e)=>{
             setUser({...user, useraddr: {extra: e.target.value}})}} placeholder="상세주소" style={{width: '100%'}}/> */}
         <Button variant="outlined" startIcon={<SearchIcon />} onClick={onChangeOpenPost}>주소검색</Button>
