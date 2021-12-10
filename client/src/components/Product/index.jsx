@@ -3,37 +3,37 @@ import ImageList from '@mui/material/ImageList';
 import StyledProduct from './style';
 import Optionitem from './option';
 import GetList from "../../action/fruitlist";
-import { fruits } from "../../__mocks__/fruits";
+// import { fruits } from "../../__mocks__/fruits";
 
 const Product = () => {
-  const [itemData, setItemData] = useState(fruits);
+  const [itemData, setItemData] = useState([]);
+
+  const initialState = {
+    fno: 0,
+    fname: "",
+    fimage: "",
+    Price: 0,
+    Count: 0,
+    Expiration_date: "",
+  };
 
   useEffect(()=>{
     GetList()
-    .then(e => {
-      console.log(e);
-      // setItemData({...itemData, 
-      // img: ,
-      // fruitname: ,
-      // price: ,
-      // description : ,
-      // expiredate: ,
-      // count: });
+    .then(data => {
+      console.log(data);
+      setItemData(data);
     })
-    .catch(e => {
-      console.log(e);
+    .catch(error => {
+      console.log(error);
     })
-  })
+  }, [])
 
   return (
     <StyledProduct>
       <div className="content">
         <ImageList sx={{ width: '70rem', margin: "-70px auto", textAlign: 'center', overflow: 'visible' }} cols={3} rowHeight={250}>
-          {itemData.map(function(item){
-            return(
-              <Optionitem key={item.fruitname} item={item}/>
-            )
-            }
+          {itemData.map((item) => 
+            <Optionitem key={item.fno+item.fruitname} item={item}/>
           )}
         </ImageList>
       </div>
