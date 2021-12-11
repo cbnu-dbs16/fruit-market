@@ -11,12 +11,15 @@ DROP TABLE comments;
 -- Customer --
 CREATE TABLE Customer(
    Cno               int      NOT NULL PRIMARY KEY,
-   username          varchar(45),
-   Email             varchar(50),
-   cus_id            varchar(45),  
-   cus_password      varchar(45),  
-   PhoneNumber       varchar(45)
-   
+   cus_id			   varchar(45),
+   cus_password		varchar(45),
+   username	         varchar(45),
+   PhoneNumber	      varchar(45),
+   city				   varchar(45),
+   gu                varchar(45),
+   dong              varchar(45),
+   jibun			      varchar(45),
+   Email			      varchar(45)
 );
 
  ALTER TABLE Customer ADD UNIQUE KEY (cus_id);
