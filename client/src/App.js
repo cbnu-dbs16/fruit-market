@@ -4,6 +4,7 @@ import Login from './components/Login';
 import Register from './components/Register';
 import Product from './components/Product';
 import Detail from './components/Product/detail';
+import Comment from './components/Product/comment';
 import Cart from './components/Cart';
 import Order from './components/Order';
 import Mypage from './components/Mypage';
@@ -51,8 +52,10 @@ function App() {
         <div className="container">
           <Routes>
             <Route path="" element={<Home />} />
-            <Route path="product" exact element={<Product />} />
-            <Route path="detail/:name" exact element={<Detail />} />
+            <Route path="product/*" exact element={<Product />} />
+            <Route path="detail/:name" exact element={<Detail />}>
+              <Route path="comment" element={<Comment />} />
+            </Route>
             <Route path="cart" exact element={<Cart />} />
             <Route path="order" exact element={<Order />} />
             <Route path="mypage" exact element={<Mypage />} />
