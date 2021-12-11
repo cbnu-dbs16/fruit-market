@@ -16,8 +16,8 @@ app.post('/api/Customer', (req, res) => {
     var body = req.body;
     console.log(body);
 
-    var sql = 'INSERT INTO Customer VALUES(?, ?, ?, ?, ?, ?)';
-    var params = [body.Cno, body.username, body.email, body.cus_id,body.cus_password, body.PhoneNumber];
+    var sql = 'INSERT INTO Customer VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    var params = [body.Cno, body.cus_id, body.cus_password, body.username,body.PhoneNumber, body.city, body.gu, body.dong, body.jibun, body.Email];
     console.log(sql);
     conn.query(sql, params, function(err){
         if(err) console.log('Insertion failed.. ' + err);
