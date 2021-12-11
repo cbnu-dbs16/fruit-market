@@ -89,6 +89,24 @@ export const StyledDetail = styled.div`
     display: block;
     margin: 1.2em 0 1.2em 0;
   }
+  .item_view_tab{
+
+  }
+  .board-item-container{
+    display: table;
+    margin: 0 auto;
+  }
+  .inquiry-board-header {
+    display: flex;
+  }
+  ul{
+    width: 1010px;
+    margin: 0 auto;
+  }
+  li{
+    display: flex;
+    padding: 1em 8rem
+  }
 `
 
 export default Product;
