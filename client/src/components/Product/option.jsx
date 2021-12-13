@@ -22,8 +22,8 @@ function Optionitem(props){
         //     userid: , 
         //     itemid: }
         AddFriut(item)
-        .then(e => {
-            console.log(e)
+        .then(data => {
+            console.log(data)
         })
         .catch(e => {
             console.log(e)

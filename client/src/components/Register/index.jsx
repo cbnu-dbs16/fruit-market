@@ -67,12 +67,12 @@ const Register = () => {
     textAlign: 'center',
   };
 
-  const handleRegister = e => {
-    e.preventDefault();
+  const handleRegister = () => {
+    // e.preventDefault();
     console.log(user);
     RegisterUser(user)
-      .then(e => {
-        console.log(e)
+      .then(data => {
+        console.log(data)
       })
       .catch(e => {
         console.log(e)
