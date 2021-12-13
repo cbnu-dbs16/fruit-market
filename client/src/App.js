@@ -78,7 +78,7 @@ function App() {
           <Routes>
             <Route path="" element={<Home />} />
             <Route path="product/*" exact element={<Product />} />
-            <Route path="detail/:name" exact element={<Detail />}>
+            <Route path="detail/:fno" exact element={<Detail />}>
               <Route path="comment" element={<Comment />} />
             </Route>
             <Route path="cart" exact element={<Cart />} />
