@@ -18,7 +18,7 @@ const Order = () => {
     })
 
     const handleOrder = () => {
-
+        alert('주문이 완료되었습니다.');
     }
 
     return (
@@ -91,7 +91,7 @@ const Order = () => {
                 fontSize: '16px',
                 padding: '16px 100px'}}>{orderitem.reduce((acc, cur) => {
                     return acc + cur.Price;
-                }, 0)}주문하기</button>
+                }, 0)}원 결제하기</button>
             </div>
         </div>
         </StyledOrder>
