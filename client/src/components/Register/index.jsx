@@ -30,10 +30,11 @@ const useStyles = makeStyles({
 
 const Register = () => {
   const [user, setUser] = useState({
-    userid: '',
-    userpwd: '',
+    cus_id: '',
+    cus_password: '',
     username: '',
-    userphonenum: '',
+    PhoneNumber: '',
+    Email: '',
     city: '',
     gu: '',
     dong: '',
@@ -64,11 +65,11 @@ const Register = () => {
   const postCodeStyle = {
     width: '100%',
     margin: '2em auto',
-    textAlign: 'center',
+    textAlign: 'center'
   };
 
-  const handleRegister = () => {
-    // e.preventDefault();
+  const handleRegister = (e) => {
+    e.preventDefault();
     console.log(user);
     RegisterUser(user)
       .then(data => {
@@ -89,11 +90,11 @@ const Register = () => {
       <hr className={classes.hr} />
       <p className={classes.p}>아이디</p>
       <FormControl sx={{ m: '20px 0px', width: '100%' }} variant="standard">
-        <OutlinedInput onChange={(e)=>{setUser({...user, userid: e.target.value})}} placeholder="아이디를 입력해주세요." />
+        <OutlinedInput onChange={(e)=>{setUser({...user, cus_id: e.target.value})}} placeholder="아이디를 입력해주세요." />
       </FormControl><br/>
       <p className={classes.p}>비밀번호</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <OutlinedInput onChange={(e)=>{setUser({...user, userpwd: e.target.value})}} placeholder="비밀번호를 입력해주세요." />
+        <OutlinedInput onChange={(e)=>{setUser({...user, cus_password: e.target.value})}} placeholder="비밀번호를 입력해주세요." />
       </FormControl>
       <p className={classes.p}>비밀번호 확인</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
@@ -105,11 +106,11 @@ const Register = () => {
       </FormControl>
       <p className={classes.p}>전화번호</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <OutlinedInput onChange={(e)=>{setUser({...user, userphonenum: e.target.value})}} placeholder="'-'제외하고 숫자만 입력" />
+        <OutlinedInput onChange={(e)=>{setUser({...user, PhoneNumber: e.target.value})}} placeholder="'-'제외하고 숫자만 입력" />
       </FormControl>
       <p className={classes.p}>이메일</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <OutlinedInput onChange={(e)=>{setUser({...user, useremail: e.target.value})}} placeholder="이메일을 입력해주세요." />
+        <OutlinedInput onChange={(e)=>{setUser({...user, Email: e.target.value})}} placeholder="이메일을 입력해주세요." />
       </FormControl>
       <p className={classes.p}>주소</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
