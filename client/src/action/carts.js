@@ -1,8 +1,8 @@
 import CartService from '../services/cartservice';
 
-export const AddFriut = async item => {
+export const AddFriut = async data => {
     try {
-      const res = await CartService.addcart(item);
+      const res = await CartService.addcart(data);
       console.log(res);
       return Promise.resolve(res.data);
     } catch (err) {
