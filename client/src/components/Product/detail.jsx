@@ -102,7 +102,6 @@ const ProductDetail = () => {
                     padding: '16px 100px'}}>장바구니 담기</button>
                     <Link to="comment">
                         <button className="cartBtn" style={{
-                            // background: 'linear-gradient(45deg, #A814E7 30%, #288CD2 92%)',
                             border: '1px solid #8a0a8a',
                             borderRadius: '3px',
                             color: 'black',
