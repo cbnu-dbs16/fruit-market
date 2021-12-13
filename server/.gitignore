@@ -1,4 +1,5 @@
 # dependencies
-server/node_modules/
-server/config/database.js
+server/node_modules
+server/config
+client/node_modules
 
