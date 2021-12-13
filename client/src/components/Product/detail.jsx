@@ -3,8 +3,12 @@ import { StyledDetail } from './style';
 import { useParams, useNavigate, Outlet } from 'react-router-dom';
 import GetDetailItem from '../../action/detail';
 import { Link } from "react-router-dom"
+import { AddFriut } from '../../action/carts';
+import { useCookies } from 'react-cookie';
+import Comment from './comment';
 
 const ProductDetail = () => {
+    const [cookies] = useCookies(['userid'])
     const navigate = useNavigate();
     const itemname = useParams();
     const [item, setItem] = useState({
@@ -32,7 +36,14 @@ const ProductDetail = () => {
     }
 
     const handleAddToCart = () => {
-
+        const cartitem = {'cus_id' : cookies.userid, 'fno' : item.fno }
+        AddFriut(cartitem)
+        .then(data => {
+            console.log(data)
+        })
+        .catch(e => {
+            console.log(e)
+        })
     }
 
     const decreasecnt = () => {
@@ -51,8 +62,8 @@ const ProductDetail = () => {
             <div className="basic">
                 <img src={item.fimage} width={350} height={350} />
                 <div>
-                    <button onClick={() => navigate(-1)}>
-                        <p className="golist"> &lt; 목록으로 &gt; </p>
+                    <button>
+                        <Link to="/product" className="golist"> &lt; 목록으로 &gt; </Link>
                     </button>
                 </div>
             </div>
@@ -89,32 +100,22 @@ const ProductDetail = () => {
                     color: 'white',
                     fontSize: '16px',
                     padding: '16px 100px'}}>장바구니 담기</button>
+                    <Link to="comment">
+                        <button className="cartBtn" style={{
+                            // background: 'linear-gradient(45deg, #A814E7 30%, #288CD2 92%)',
+                            border: '1px solid #8a0a8a',
+                            borderRadius: '3px',
+                            color: 'black',
+                            fontSize: '16px',
+                            padding: '16px 30px',
+                            margin: '0 10px'}}>후기</button>
+                    </Link>
+                {/* <div className="item_view_tab">
+                    <Link to="comment">후기</Link>
+                </div> */}
             </div>
             </div>
-            <div className="item_view_tab">
-                <Link to="comment">후기</Link>
-            </div>
-            <div class="board-item-container">
-                <Outlet />
-                <div class="inquiry-board-header">
-                    <li>제목</li>
-                    <li>작성자</li>
-                    <li>작성일</li>
-                </div>
-                <ul class="inquiry-notice-list">
-                    <li class="inquiry-item notice-item">
-                        <div class="item-cell notice-cell">
-                            <strong>판매 (일시)중단 제품 안내 (21.12.03 업데이트)</strong>
-                        </div>
-                        <div class="item-cell">
-                            <p class="txt_sub text_medium normal ">Marketkurly</p>
-                        </div>
-                        <div class="item-cell">
-                            <p class="txt_sub text_medium normal ">2017.02.01</p>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <Outlet />
         </div>
         </StyledDetail>
     );
