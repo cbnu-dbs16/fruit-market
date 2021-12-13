@@ -1,6 +1,6 @@
 import http from '../common/http'
 
-const addcart = item => http.post(`cart/`, item);   // userid, fruitid
+const addcart = data => http.post(`cart/`, data);   // userid, fruitid
 const deletecart = item => http.delete(`cart/`, item);  // userid, fruitid
 const cartlist = cus_id => http.get(`cartList/`, 1);   // userid
 
