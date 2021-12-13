@@ -12,36 +12,32 @@ import { useCookies } from 'react-cookie';
 const Cart = () => {
   const btnstyle = btnStyles();
     const [itemincart, setitemincart] = useState([{
-        img: 'https://user-images.githubusercontent.com/63364990/144433099-28fb1f9c-0027-4bab-be3f-20303dbc277c.png',
-        fruitname: 'Breakfast',
-        price: 1000,
-        description : '소개',
-        expiredate: '',
-        count: 1
+        fimage: 'https://user-images.githubusercontent.com/63364990/144433099-28fb1f9c-0027-4bab-be3f-20303dbc277c.png',
+        fname: 'Breakfast',
+        Price: 1000,
+        Expiration_date: '',
+        Count: 1
       },
       {
-        img: 'https://user-images.githubusercontent.com/63364990/144431391-039a362d-800e-40ff-95b6-fff43686c750.png',
-        fruitname: 'Burger',
-        price: 1000,
-        description : '소개',
-        expiredate: '',
-        count: 1
+        fimage: 'https://user-images.githubusercontent.com/63364990/144431391-039a362d-800e-40ff-95b6-fff43686c750.png',
+        fname: 'Burger',
+        Price: 1000,
+        Expiration_date: '',
+        Count: 1
       },
       {
-        img: 'https://user-images.githubusercontent.com/63364990/144431440-3c35aff5-9202-4cae-a37c-4311c576152c.png',
-        fruitname: 'Camera',
-        price: 1000,
-        description : '소개',
-        expiredate: '',
-        count: 1
+        fimage: 'https://user-images.githubusercontent.com/63364990/144431440-3c35aff5-9202-4cae-a37c-4311c576152c.png',
+        fname: 'Camera',
+        Price: 1000,
+        Expiration_date: '',
+        Count: 1
       },
       {
-        img: 'https://user-images.githubusercontent.com/63364990/144431444-3cde0cef-3cd7-4390-8ed0-f4482fbc43fb.png',
-        fruitname: 'Coffee',
-        price: 1000,
-        description : '소개',
-        expiredate: '',
-        count: 1
+        fimage: 'https://user-images.githubusercontent.com/63364990/144431444-3cde0cef-3cd7-4390-8ed0-f4482fbc43fb.png',
+        fname: 'Coffee',
+        Price: 1000,
+        Expiration_date: '',
+        Count: 1
       }]);
     // const [itemincart, setitemincart] = useState([{
     //     fimage: '',
