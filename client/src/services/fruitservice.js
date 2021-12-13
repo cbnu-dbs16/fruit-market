@@ -1,7 +1,9 @@
 import http from '../common/http'
 
 const getlist = () => http.get(`fruits/`);
-const getdetail = itemname => http.get(`fruits/detail/`, 1);
+const getdetail = fno => {
+    console.log(fno);
+    http.get(`fruits/detail/`, fno);}
 
 const FruitService = {
     getlist,
