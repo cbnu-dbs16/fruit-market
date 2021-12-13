@@ -27,7 +27,8 @@ function Comment(){
     const handlecommentform = () => {
         setCommentForm({...commentform, state: true});
     }
-    const postcomment = () => {
+    const postcomment = (e) => {
+        // e.preventDefault();
         const fklist = {
             // cus_id: ,
             fno: fno,
@@ -43,12 +44,27 @@ function Comment(){
 
     return(
         <div className="board-item-container">
-            <Button onClick={handlecommentform}>후기쓰기</Button>
+            <button className="cartBtn" onClick={handlecommentform} style={{
+                border: '1px solid #8a0a8a',
+                borderRadius: '3px',
+                color: 'black',
+                fontSize: '12px',
+                padding: '5px 10px',
+                margin: '10px'}}>후기쓰기</button>
             {commentform.state ? 
                 <div>
-                    <form action="">
-                        <input type="text" onChange={(event)=>setCommentForm({...commentform, content: event.target.value})}/>
-                        <Button type="submit" onClick={postcomment}>작성하기</Button>
+                    <form>
+                        <input type="text" placeholder="한 줄 평을 작성해주세요 !" style={{
+                            padding: '8px 15px',
+                            margin: '0 10px'}}
+                            onChange={(event)=>setCommentForm({...commentform, content: event.target.value})}/>
+                        <button className="cartBtn" onClick={postcomment} style={{
+                            border: '1px solid #8a0a8a',
+                            borderRadius: '3px',
+                            color: 'black',
+                            fontSize: '12px',
+                            padding: '5px 10px',
+                            margin: '10px'}}>작성하기</button>
                     </form>
                 </div>
                 : null}
