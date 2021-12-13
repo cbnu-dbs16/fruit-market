@@ -6,6 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import SearchIcon from '@mui/icons-material/Search';
 import { RegisterUser } from '../../action/users';
+import btnStyles from "../../styles/Btnstyle";
 
 const useStyles = makeStyles({
   root: {
@@ -22,16 +23,6 @@ const useStyles = makeStyles({
     backgroundColor: '#000',
     margin: '2em 0'
   },
-  registerbtn: {
-    background: 'linear-gradient(45deg, #A814E7 30%, #288CD2 92%)',
-    border: 0,
-    borderRadius: 3,
-    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-    color: 'white',
-    fontSize: '18px',
-    height: 55,
-    padding: '0 30px',
-  },
   p: {
     float: 'left'
   }
@@ -43,13 +34,10 @@ const Register = () => {
     userpwd: '',
     username: '',
     userphonenum: '',
-    useremail: '',
-    useraddr: {
-      city: '',
-      gu: '',
-      dong: '',
-      jibun: ''
-    }
+    city: '',
+    gu: '',
+    dong: '',
+    jibun: ''
   })
 
   const [isOpenPost, setIsOpenPost] = useState(false);
@@ -64,11 +52,11 @@ const Register = () => {
     console.log(data);
     const jibunaddr = data.jibunAddress.match(/[0-9|-]/g).join('');
     console.log(jibunaddr);
-    setUser({...user, useraddr: {
+    setUser({...user,
       city: data.sido,
       gu: data.sigungu,
       dong: data.bname,
-      jibun: jibunaddr}});
+      jibun: jibunaddr});
     setIsOpenPost(false);
     setIsInputPost(true);
   };
@@ -79,19 +67,20 @@ const Register = () => {
     textAlign: 'center',
   };
 
-  const handleRegister = e => {
-    e.preventDefault();
+  const handleRegister = () => {
+    // e.preventDefault();
     console.log(user);
     RegisterUser(user)
-      .then(e => {
-            console.log(e)
+      .then(data => {
+        console.log(data)
       })
       .catch(e => {
-            console.log(e)
+        console.log(e)
       })
   };
 
   const classes = useStyles();
+  const btnstyle = btnStyles();
 
   return (
     <div className={classes.root} id="modal">
@@ -125,7 +114,7 @@ const Register = () => {
       <p className={classes.p}>주소</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
       {isInputPost ? (
-          <OutlinedInput defaultValue={user.useraddr.city+" "+user.useraddr.gu+" "+user.useraddr.dong+" "+user.useraddr.jibun} style={{width: '100%'}}/>): null}
+          <OutlinedInput defaultValue={user.city+" "+user.gu+" "+user.dong+" "+user.jibun} style={{width: '100%'}}/>): null}
         {/* <OutlinedInput onChange={(e)=>{
             setUser({...user, useraddr: {extra: e.target.value}})}} placeholder="상세주소" style={{width: '100%'}}/> */}
         <Button variant="outlined" startIcon={<SearchIcon />} onClick={onChangeOpenPost}>주소검색</Button>
@@ -134,7 +123,7 @@ const Register = () => {
         {isOpenPost ? (<DaumPostcode style={postCodeStyle} autoClose onComplete={onCompletePost} />): null}
       </div>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <Button type="submit" variant="contained" className={classes.registerbtn}>회원가입</Button>
+        <Button type="submit" variant="contained" className={btnstyle.btn}>회원가입</Button>
       </FormControl>
       </form>
     </div>

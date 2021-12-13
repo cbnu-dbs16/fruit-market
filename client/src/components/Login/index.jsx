@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -11,6 +11,9 @@ import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import { makeStyles } from '@mui/styles';
 import StyledLogin from './style';
+import btnStyles from "../../styles/Btnstyle";
+import { useCookies } from 'react-cookie'
+import { LoginUser } from '../../action/users';
 
 const useStyles = makeStyles({
     root: {
@@ -21,29 +24,24 @@ const useStyles = makeStyles({
     h1: {
         fontSize: '28px',
     },
-    loginbtn: {
-      background: 'linear-gradient(45deg, #A814E7 30%, #288CD2 92%)',
-      border: 0,
-      borderRadius: 3,
-      boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
-      color: 'white',
-      fontSize: '18px',
-      height: 55,
-      padding: '0 30px',
-    },
   });
 
 const Login = () => {
+  const btnstyle = btnStyles();
 
   const [values, setValues] = React.useState({
-    amount: '',
-    password: '',
-    weight: '',
-    weightRange: '',
+    userid: '',
+    userpwd: '',
     showPassword: false,
   });
+  const [cookies, setCookie, removeCookie] = useCookies(['userId'])
+  const [cookieExpires] = useState({
+    now: new Date(),
+    after5h: new Date(),
+  })
 
   const handleChange = (prop) => (event) => {
+    console.log(event.target.value);
     setValues({ ...values, [prop]: event.target.value });
   };
 
@@ -60,11 +58,30 @@ const Login = () => {
 
   const classes = useStyles();
 
+  const handleLogin = e => {
+    e.preventDefault();
+    console.log(values);
+    const user = { 'id' : values.userid, 'password' : values.userpwd }
+    cookieExpires.after5h.setHours(cookieExpires.now.getHours() + 5)
+    LoginUser(user)
+    .then(data => {
+      console.log(data);
+      if(data.length !== 0)
+        setCookie('userid', values.userid, { path: '/', expires: cookieExpires.after5h })
+        console.log(cookies);
+    })
+    .catch(error => {
+      console.log(error);
+      alert('아이디 또는 비밀번호를 다시 확인해주세요.')
+    })
+  }
+
   return (
     <div className={classes.root}>
         <h1 className={classes.h1}>
             로그인
         </h1>
+        <form onSubmit={handleLogin}>
         <FormControl sx={{ m: '20px 0px', width: '100%' }} variant="standard">
         <TextField
           id="standard-textarea"
@@ -72,6 +89,7 @@ const Login = () => {
           label="아이디"
           multiline
           variant="standard"
+          onChange={handleChange('userid')}
         />
         </FormControl><br/>
         <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
@@ -79,8 +97,8 @@ const Login = () => {
             <Input
               id="standard-adornment-password"
               type={values.showPassword ? 'text' : 'password'}
-              value={values.password}
-              onChange={handleChange('password')}
+              value={values.userpwd}
+              onChange={handleChange('userpwd')}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -95,8 +113,9 @@ const Login = () => {
             />
         </FormControl>
         <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-            <Button variant="contained" className={classes.loginbtn}>로그인</Button>
+            <Button type="submit" variant="contained" className={btnstyle.btn}>로그인</Button>
         </FormControl>
+        </form>
         <StyledLogin>
             <div className="accountservice">
                 <a href="" className="service_register">회원가입</a>

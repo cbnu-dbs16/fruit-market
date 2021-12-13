@@ -89,6 +89,50 @@ export const StyledDetail = styled.div`
     display: block;
     margin: 1.2em 0 1.2em 0;
   }
+  .item_view_tab{
+
+  }
+  .board-item-container{
+    display: table;
+    margin: 0 auto;
+  }
+  .review-header {
+    display: flex;
+    border-top: 2.5px solid black;
+  }
+  ul{
+    width: 1010px;
+    margin: 0 auto;
+  }
+  li{
+    display: flex;
+    padding: 1em 8rem
+  }
+  table.review-listheader{
+    margin: 15px 0;
+    color: #353535;
+    font-size: 15px;
+    line-height: 140%;
+    table-layout: fixed;
+    max-width: 1050px;
+  }
+  table.review-listheaderd{
+    // margin: 15px 0;
+    color: #353535;
+    border-top: 1px solid grey;
+    font-size: 15px;
+    line-height: 140%;
+    table-layout: fixed;
+    max-width: 1050px;
+    tr{
+      // margin: 1em 0;
+    }
+  }
+  tr.commentinfo{
+    margin: 15px 0;
+    height: 200px;
+    // background : black;
+  }
 `
 
 export default Product;

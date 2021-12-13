@@ -2,8 +2,15 @@ import React, { useEffect, useState } from "react";
 import { Bringcartlist } from "../../action/carts";
 import StyledCart from './style';
 import EachItem from './eachitem';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import Button from '@mui/material/Button';
+import btnStyles from "../../styles/Btnstyle";
+import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 const Cart = () => {
+  const btnstyle = btnStyles();
     const [itemincart, setitemincart] = useState([{
         img: 'https://user-images.githubusercontent.com/63364990/144433099-28fb1f9c-0027-4bab-be3f-20303dbc277c.png',
         fruitname: 'Breakfast',
@@ -37,35 +44,56 @@ const Cart = () => {
         count: 1
       }]);
     // const [itemincart, setitemincart] = useState([{
-    //     img: '',
-    //     itemname: '',
-    //     price: 0,
-    //     count: 0,
+    //     fimage: '',
+    //     fname: '',
+    //     Price: 0,
+    //     Count: 0,
     // }]);
-
+    const [select, setselect] = useState(1);
+    const [cookies] = useCookies(['userid'])
     useEffect(()=>{
-        // Bringcartlist()
-        // .then(e => {
-        //     console.log(e);
-        //     setitemincart({...itemincart, 
-        //         img: '',
-        //         itemname: '',
-        //         price: 0,
-        //         count: 0, });
-        // })
-        // .catch(e => {
-        //     console.log(e);
-        // })
-    })
+        Bringcartlist(cookies.userid)
+        .then(data => {
+            console.log(data);
+            // setitemincart({...itemincart, 
+            //     fimage: data.fimage,
+            //     fname: data.fname,
+            //     Price: data.Price,
+            //     Count: data.Count,
+        })
+        .catch(e => {
+            console.log(e);
+        })
+    }, [])
+    const selectitem = () => {
+      setselect(!select);
+    }
 
     return (
         <StyledCart>
             <div className="content">
-                <div className="listincart">
-                    {itemincart.map((item)=>
-                        <EachItem key={item.itemname} item={item}/>
-                    )}
+              <h2 className="tit">장바구니</h2>
+              <div className="cart_select">
+                <div className="inner_select">
+                  <label className="check">
+                    {select ? <CheckCircleIcon onClick={selectitem} style={{ padding: '0 20px 0 0'}}/> : <CheckCircleOutlineIcon onClick={selectitem} style={{ padding: '0 20px 0 0'}}/>}
+                    전체선택
+                  </label>
+                  <span>|</span>
+                  <a href="#none" className="btn_delete">선택삭제</a>
                 </div>
+                {/* <hr /> */}
+              </div>
+              <div className="listincart">
+                  {itemincart.map((item)=>
+                      <EachItem key={item.itemname} item={item} select={select}/>
+                  )}
+              </div>
+              <div className="goorder">
+                <Link to="/order">
+                  <Button type="submit" variant="contained" className={btnstyle.btn}>주문하기</Button>
+                </Link>
+              </div>
             </div>
         </StyledCart>
     )
