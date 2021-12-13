@@ -4,7 +4,7 @@ export const AddFriut = async item => {
     try {
       const res = await CartService.addcart(item);
       console.log(res);
-      return Promise.resolve(res.data.data);
+      return Promise.resolve(res.data);
     } catch (err) {
       return Promise.reject(err);
     }
@@ -15,17 +15,17 @@ export const DeleteFruit = async item => {
       console.log(item);
       const res = await CartService.deletecart(item);
       console.log(res);
-      return Promise.resolve(res.data.data);
+      return Promise.resolve(res.data);
     } catch (err) {
       return Promise.reject(err);
     }
 }
 
-export const Bringcartlist = async item => {
+export const Bringcartlist = async cus_id => {
     try {
-      const res = await CartService.cartlist(1);
+      const res = await CartService.cartlist(cus_id);
       console.log(res);
-      return Promise.resolve(res.data.data);
+      return Promise.resolve(res.data);
     } catch (err) {
       return Promise.reject(err);
     }
