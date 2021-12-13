@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
@@ -17,9 +17,24 @@ import {
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
 import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 function App() {
   const [activeNav, setActiveNav] = useState(1);
+  const [cookies, removeCookie] = useCookies(['userid'])
+  const [hasCookie, setHasCookie] = useState(false)
+  const handlelogout = async () => {
+    await removeCookie('userid');
+    // await setHasCookie(false);
+  }
+
+  useEffect(() => {
+    if (cookies.userid && cookies.userid !== 'undefined') {
+      setHasCookie(true)
+    } else {
+      setHasCookie(false)
+    }
+  }, [cookies.userid])
 
   return (
     <StyledApp>
@@ -28,6 +43,7 @@ function App() {
         <div className="header">
           <img src="mainlogo.png" className="logo_area" width={150} height={55} alt="logo"/>
           <div className="account">
+          {!hasCookie ? 
             <ul className="list_menu">
               <li class="menu menu_join">
                 <Link to="register" style={{padding: '0 11px 0 11px', color: '#5f0080'}}>회원가입</Link>
@@ -39,6 +55,15 @@ function App() {
                 <a href="#" style={{padding: '0 11px 0 11px'}}>고객센터</a>
               </li>
             </ul>
+            : 
+            <ul className="list_menu">
+              <li class="menu menu_login">
+                <a onClick={handlelogout()} style={{padding: '0 11px 0 11px'}}>로그아웃</a>
+              </li>
+              <li class="menu menu_center">
+                <a href="#" style={{padding: '0 11px 0 11px'}}>고객센터</a>
+              </li>
+            </ul>}
           </div>
         </div>
         <div className="gnb">
