@@ -3,10 +3,12 @@ import Option from './style';
 import ImageListItem from '@mui/material/ImageListItem';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { AddFriut } from '../../action/carts';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 function Optionitem(props){
     const [item, setItem] = useState(props.item);
+    const [cookies] = useCookies(['userid'])
     console.log(item);
 
     const decreasecnt = () => {
@@ -18,10 +20,11 @@ function Optionitem(props){
             setItem({...item, Count: item.Count + 1, Price: (item.Price / item.Count) * (item.Count + 1)});
     }
     const handleAddcart = () => {
-        // const item = {
-        //     userid: , 
-        //     itemid: }
-        AddFriut(item)
+        const data = {
+            cus_id: 'qwer', 
+            fno: item.fno };
+            console.log(data);
+        AddFriut(data)
         .then(data => {
             console.log(data)
         })
@@ -43,7 +46,7 @@ function Optionitem(props){
             <div className="carticon" onClick={handleAddcart}>
             <AddShoppingCartIcon />
             </div>
-            <Link to={`/detail/${item.fname}`}>
+            <Link to={`/detail/${item.fno}`}>
                 <ImageListItem key={item.fimage} style={{ margin: '120px 5px'}}>
                     <img src={`${item.fimage}`} alt={item.fname}/> 
                     <div className="itemname" style={{ float : 'left', margin: '15px 0px'}}>
