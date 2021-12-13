@@ -10,7 +10,7 @@ import Comment from './comment';
 const ProductDetail = () => {
     const [cookies] = useCookies(['userid'])
     const navigate = useNavigate();
-    const itemname = useParams();
+    const itemno = useParams();
     const [item, setItem] = useState({
         fno: 0,
         fname: "",
@@ -25,7 +25,8 @@ const ProductDetail = () => {
     }, []);
 
     const getItemInfo = async () => {
-        await GetDetailItem(itemname.fno)
+        console.log(itemno.fno);
+        await GetDetailItem(itemno.fno)
         .then(data => {
             console.log(data)
             setItem({...item, fno: data.fno, fimage: data.fimage, fname: data.fname, Price: data.Price, Expiration_date: data.Expiration_date, Count: data.Count});
