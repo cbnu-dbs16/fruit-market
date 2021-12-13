@@ -7,6 +7,7 @@ import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import Button from '@mui/material/Button';
 import btnStyles from "../../styles/Btnstyle";
 import { Link } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 
 const Cart = () => {
   const btnstyle = btnStyles();
@@ -43,22 +44,22 @@ const Cart = () => {
         count: 1
       }]);
     // const [itemincart, setitemincart] = useState([{
-    //     img: '',
-    //     itemname: '',
-    //     price: 0,
-    //     count: 0,
+    //     fimage: '',
+    //     fname: '',
+    //     Price: 0,
+    //     Count: 0,
     // }]);
     const [select, setselect] = useState(1);
-
+    const [cookies] = useCookies(['userid'])
     useEffect(()=>{
-        Bringcartlist()
-        .then(e => {
-            console.log(e);
+        Bringcartlist(cookies.userid)
+        .then(data => {
+            console.log(data);
             // setitemincart({...itemincart, 
-            //     img: '',
-            //     itemname: '',
-            //     price: 0,
-            //     count: 0, });
+            //     fimage: data.fimage,
+            //     fname: data.fname,
+            //     Price: data.Price,
+            //     Count: data.Count,
         })
         .catch(e => {
             console.log(e);
