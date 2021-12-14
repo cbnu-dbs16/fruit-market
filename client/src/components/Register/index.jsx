@@ -51,13 +51,14 @@ const Register = () => {
 
   const onCompletePost = (data) => {
     console.log(data);
-    const jibunaddr = data.jibunAddress.match(/[0-9|-]/g).join('');
-    console.log(jibunaddr);
+    const jibunaddr = data.jibunAddress.match(/[0-9|-]/g);
+    const jibunaddr2 = jibunaddr ? jibunaddr.join('') : "";
+    console.log(jibunaddr2);
     setUser({...user,
       city: data.sido,
       gu: data.sigungu,
       dong: data.bname,
-      jibun: jibunaddr});
+      jibun: jibunaddr2});
     setIsOpenPost(false);
     setIsInputPost(true);
   };
@@ -115,7 +116,7 @@ const Register = () => {
       <p className={classes.p}>주소</p>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
       {isInputPost ? (
-          <OutlinedInput defaultValue={user.city+" "+user.gu+" "+user.dong+" "+user.jibun} style={{width: '100%'}}/>): null}
+          <OutlinedInput defaultValue={user.city + " " + user.gu + " " + user.dong + " " + user.jibun} style={{width: '100%'}}/>): null}
         {/* <OutlinedInput onChange={(e)=>{
             setUser({...user, useraddr: {extra: e.target.value}})}} placeholder="상세주소" style={{width: '100%'}}/> */}
         <Button variant="outlined" startIcon={<SearchIcon />} onClick={onChangeOpenPost}>주소검색</Button>
