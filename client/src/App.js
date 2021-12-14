@@ -12,7 +12,9 @@ import StyledApp from './styles/Appstyle';
 import {
   BrowserRouter,
   Routes,
-  Route
+  Route,
+  // Redirect,
+  Navigate
 } from "react-router-dom";
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PersonIcon from '@mui/icons-material/Person';
@@ -24,8 +26,8 @@ function App() {
   const [cookies, removeCookie] = useCookies(['userid'])
   const [hasCookie, setHasCookie] = useState(false)
   const handlelogout = async () => {
-    await removeCookie('userid');
-    // await setHasCookie(false);
+    removeCookie('userid');
+    await setHasCookie(false);
   }
 
   useEffect(() => {
@@ -34,7 +36,8 @@ function App() {
     } else {
       setHasCookie(false)
     }
-  }, [cookies.userid])
+    console.log(hasCookie);
+  }, [cookies])
 
   return (
     <StyledApp>
@@ -85,7 +88,9 @@ function App() {
             <Route path="order" exact element={<Order />} />
             <Route path="mypage" exact element={<Mypage />} />
             <Route path="register" element={<Register />} />
-            <Route path="login" element={<Login />} />
+            <Route path="login"  element={hasCookie ? <Navigate to="/product" /> : <Login />} />
+              {/* {hasCookie ? <Navigate to="/product"/> : <Navigate to="/login"/>} */}
+            {/* </Route> */}
           </Routes>
         </div>
       </div>  
