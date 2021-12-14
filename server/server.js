@@ -1,18 +1,7 @@
 const express = require('express');
+const db_config   = require('./config/database.js');
 const bodyParser = require('body-parser');
-//const db_config   = require('./config/database.js');
-//const conn = db_config.init();
-
-const mysql      = require('mysql');
-const conn = mysql.createConnection({
-    host: '127.0.0.1',
-    port: '3306',
-    user: 'root',
-    password: '1234',
-    database: 'fruit_market'
-});
-
-conn.connect();
+const conn = db_config.init();
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -27,7 +16,7 @@ app.post('/api/Customer', (req, res) => {
     console.log(body);
 
     var sql = 'INSERT INTO Customer VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    var params = [body.cus_id, body.cus_password, body.username, body.userphonenum, body.city, body.gu, body.dong, body.jibun, body.useremail];
+    var params = [body.cus_id, body.cus_password, body.username, body.PhoneNumber, body.city, body.gu, body.dong, body.jibun, body.Email];
     res.header("Access-Control-Allow-Origin", "*");
     conn.query(sql, params, function(err){
         if(err) console.log('Insertion failed.. ' + err);
@@ -100,8 +89,7 @@ app.get('/api/fruits', (req,res) => {
 
 app.get('/api/fruits/detail', (req,res) => {
     var sql = 'SELECT * FROM fruits WHERE fno = ?';
-    var params = [req.query.fno];
-    console.log(sql);
+    var params = [parseInt(body.fno)];
     console.log(req.query);
     res.header("Access-Control-Allow-Origin", "*");
     conn.query(sql, params,  function (err, rows, fields){
@@ -130,7 +118,7 @@ app.get('/api/orderlist', (req,res) => {
 
 app.delete('/api/cart', (req,res) => {
     var body = req.body;
-    var sql = 'DELETE FROM cart WHERE cus_id=? and fno=?';
+    var sql = 'DELETE FROM cart WHERE fk_cus_id=? and fk_fno=?';
     var params = [body.userid, body.fno];
     res.header("Access-Control-Allow-Origin", "*");
     conn.query(sql, params, function(err){
@@ -140,9 +128,10 @@ app.delete('/api/cart', (req,res) => {
 })
 
 app.get('/api/cartList', (req,res) => {
-    var sql = 'SELECT * FROM cart WHERE cus_id = ?';
+    var sql = 'SELECT * FROM cart WHERE fk_cus_id = ? and fk_fno=? ';
+    var params = [req.query.userid, parseInt(req.query.fno)];
     console.log(sql);
-    var params = [req.query.userid];
+    console.log(req.query);
     res.header("Access-Control-Allow-Origin", "*");
     conn.query(sql,params,  function (err, rows, fields){
         if(err) console.log('Load cart failed..' + err);
@@ -156,8 +145,8 @@ app.get('/api/cartList', (req,res) => {
 app.post('/api/cart', (req, res) => {
     //console.log(body);
     var body = req.body;
-    var sql = 'INSERT INTO cart VALUES (,?, ?)';
-    var params = [body.userid, body.fno];
+    var sql = 'INSERT INTO cart VALUES (?,?,?)';
+    var params = [body.cart_id,body.userid, body.fno];
     console.log(sql);
     console.log(params);
     console.log(req.query);

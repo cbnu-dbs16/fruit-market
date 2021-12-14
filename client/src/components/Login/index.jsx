@@ -113,7 +113,7 @@ const Login = () => {
             />
         </FormControl>
         <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-            <Button type="submit" variant="contained" className={btnstyle.btn}>로그인</Button>
+            <Button type="submit" variant="contained" className={btnstyle.btn}onClick={handleLogin}>로그인</Button>
         </FormControl>
         </form>
         <StyledLogin>
