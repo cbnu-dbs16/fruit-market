@@ -54,7 +54,7 @@ const Order = () => {
                         <tr className="orderinfo">
                             <th>이메일</th>
                             <td>
-                                happyu9986@gmail.com
+                                1234@gmail.com
                             </td>
                         </tr>
                     </tbody>
