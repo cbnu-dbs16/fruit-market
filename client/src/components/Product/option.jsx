@@ -5,6 +5,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { AddFriut } from '../../action/carts';
 import { Link } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import cus_id from "../../__mocks__/user";
 
 function Optionitem(props){
     const [item, setItem] = useState(props.item);
@@ -21,9 +22,9 @@ function Optionitem(props){
     }
     const handleAddcart = () => {
         const data = {
-            cus_id: 'qwer', 
+            cus_id: cus_id,
             fno: item.fno };
-            console.log(data);
+        console.log(data);
         AddFriut(data)
         .then(data => {
             console.log(data)
