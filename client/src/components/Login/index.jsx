@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, Route, Navigate, useNavigate } from "react-router-dom";
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -27,18 +28,15 @@ const useStyles = makeStyles({
   });
 
 const Login = () => {
+  const navigate = useNavigate();
   const btnstyle = btnStyles();
 
   const [values, setValues] = React.useState({
-    userid: '',
-    userpwd: '',
+    cus_id: '',
+    cus_password: '',
     showPassword: false,
   });
-  const [cookies, setCookie, removeCookie] = useCookies(['userId'])
-  const [cookieExpires] = useState({
-    now: new Date(),
-    after5h: new Date(),
-  })
+  // const [cookies, setCookie, removeCookie] = useCookies(['userid'])
 
   const handleChange = (prop) => (event) => {
     console.log(event.target.value);
@@ -61,23 +59,25 @@ const Login = () => {
   const handleLogin = e => {
     e.preventDefault();
     console.log(values);
-    const user = { 'id' : values.userid, 'password' : values.userpwd }
-    cookieExpires.after5h.setHours(cookieExpires.now.getHours() + 5)
+    const user = { 'cus_id' : '1234', 'cus_password' : '1234' }
+    // cookieExpires.after1h.setHours(cookieExpires.now.getHours() + 1)
     LoginUser(user)
     .then(data => {
       console.log(data);
-      if(data.length !== 0)
-        setCookie('userid', values.userid, { path: '/', expires: cookieExpires.after5h })
-        console.log(cookies);
+      // if(data.length !== 0)
+        // setCookie('userid', values.cus_id);
+        // console.log("cookie",cookies);
     })
     .catch(error => {
       console.log(error);
-      alert('아이디 또는 비밀번호를 다시 확인해주세요.')
+      // removeCookie('userid');
+      alert('아이디 또는 비밀번호를 다시 확인해주세요.');
     })
   }
 
   return (
     <div className={classes.root}>
+        <div>
         <h1 className={classes.h1}>
             로그인
         </h1>
@@ -97,8 +97,8 @@ const Login = () => {
             <Input
               id="standard-adornment-password"
               type={values.showPassword ? 'text' : 'password'}
-              value={values.userpwd}
-              onChange={handleChange('userpwd')}
+              value={values.cus_password}
+              onChange={handleChange('cus_password')}
               endAdornment={
                 <InputAdornment position="end">
                   <IconButton
@@ -113,18 +113,19 @@ const Login = () => {
             />
         </FormControl>
         <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-            <Button type="submit" variant="contained" className={btnstyle.btn}>로그인</Button>
+            <Button type="submit" variant="contained" className={btnstyle.btn} onClick={()=>navigate('/product', { replace: true })}>로그인</Button>
         </FormControl>
         </form>
         <StyledLogin>
             <div className="accountservice">
-                <a href="" className="service_register">회원가입</a>
+                <Link to="/register" className="service_register">회원가입</Link>
                 <div className="login_search">
                     <a href="" id="search_id">아이디 찾기</a> |
                     <a href="" id="search_pwd"> 비밀번호 찾기</a>
                 </div>
             </div>
         </StyledLogin>
+        </div>
     </div>
   )
 }
