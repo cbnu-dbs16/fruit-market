@@ -2,7 +2,6 @@ const express = require('express');
 const db_config   = require('./config/database.js');
 const bodyParser = require('body-parser');
 const conn = db_config.init();
-const jwt = require('jsonwebtoken');
 var cors = require('cors');
 
 const app = express();
@@ -15,9 +14,8 @@ app.use(bodyParser.urlencoded({ extended : true}));
 app.post('/api/Customer', (req, res) => {
     var body = req.body;
     console.log(body);
-
-    var sql = 'INSERT INTO Customer VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
-    var params = [body.Cno, body.cus_id, body.cus_password, body.username,body.PhoneNumber, body.city, body.gu, body.dong, body.jibun, body.Email];
+    var sql = 'INSERT INTO Customer VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    var params = [body.userid, body.userpwd, body.username, body.userphonenum, body.city, body.gu, body.dong, body.jibun, body.useremail];
     console.log(sql);
     conn.query(sql, params, function(err){
         if(err) console.log('Insertion failed.. ' + err);
@@ -28,9 +26,9 @@ app.post('/api/Customer', (req, res) => {
 app.get('/api/Customer', (req, res) => {
     //console.log(body);
     var sql = 'SELECT * FROM Customer WHERE cus_id = ? and cus_password = ?';
-    var params = [req.query.cus_id, req.query.cus_password];
-    console.log(sql);
-    
+    var params = [req.query.id, req.query.password];
+    console.log(req.query);
+    res.set({'access-control-allow-origin':'http://localhost:3000'});
     conn.query(sql,params, function (err, rows, fields){
         if(err) console.log('Login failed..' + err);
         else{
@@ -98,6 +96,20 @@ app.get('/api/fruits/detail', (req,res) => {
     })
 })
 
+app.get('/api/orderlist', (req,res) => {
+    var sql = 'SELECT * FROM Customer WHERE cus_id = ?';
+    var params = [req.query.cus_id];
+    console.log(sql);
+    console.log(req.query);
+    conn.query(sql,params,  function (err, rows, fields){
+        if(err) console.log('Load failed..' + err);
+        else{
+            console.log('sql 결과 : '+JSON.stringify(rows))
+            if(rows) res.send(rows);
+        }
+    })
+})
+
 app.delete('/api/cart', (req,res) => {
     var body = req.body;
     var sql = 'DELETE FROM cart WHERE id=? and Fno=?';
@@ -138,10 +150,18 @@ app.post('/api/cart', (req, res) => {
     })
 })
 
-app.use(cors({
+/*app.use(cors({
     origin: 'http://localhost:3000',
     credentials: true,
     methods: 'GET, POST'
   }));
+  */
+
+  app.use(cors({
+    credentials : true
+  }));
+
+ 
+ 
   
 app.listen(port, () => {console.log(`Listening on port ${port}`)});
