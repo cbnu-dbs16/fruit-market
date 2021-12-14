@@ -7,6 +7,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import SearchIcon from '@mui/icons-material/Search';
 import { RegisterUser } from '../../action/users';
 import btnStyles from "../../styles/Btnstyle";
+import { useNavigate } from "react-router-dom";
 
 const useStyles = makeStyles({
   root: {
@@ -29,6 +30,7 @@ const useStyles = makeStyles({
 });
 
 const Register = () => {
+  const navigate = useNavigate();
   const [user, setUser] = useState({
     cus_id: '',
     cus_password: '',
@@ -117,15 +119,13 @@ const Register = () => {
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
       {isInputPost ? (
           <OutlinedInput defaultValue={user.city + " " + user.gu + " " + user.dong + " " + user.jibun} style={{width: '100%'}}/>): null}
-        {/* <OutlinedInput onChange={(e)=>{
-            setUser({...user, useraddr: {extra: e.target.value}})}} placeholder="상세주소" style={{width: '100%'}}/> */}
         <Button variant="outlined" startIcon={<SearchIcon />} onClick={onChangeOpenPost}>주소검색</Button>
       </FormControl>
       <div>
         {isOpenPost ? (<DaumPostcode style={postCodeStyle} autoClose onComplete={onCompletePost} />): null}
       </div>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <Button type="submit" variant="contained" className={btnstyle.btn}>회원가입</Button>
+        <Button type="submit" variant="contained" className={btnstyle.btn } onClick={()=>navigate('/product', { replace: true })}>회원가입</Button>
       </FormControl>
       </form>
     </div>
