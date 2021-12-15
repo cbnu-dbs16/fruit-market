@@ -8,19 +8,21 @@ import { DeleteFruit } from '../../action/carts';
 function EachItem(props){
     const [item, setItem] = useState({...props.item});
     const [select, setselect] = useState(props.select);
+    const [fstate, setFstate] = useState(false);
     console.log(item);
     const decreasecnt = () => {
         if(item.Count > 1)
-            setItem({...item, Count: item.Count - 1, price: (item.price / item.Count) * (item.Count - 1)});
+            setItem({...item, Count: item.Count - 1, Price: (item.Price / item.Count) * (item.Count - 1)});
     }
     const increasecnt = () => {
         if(item.Count >= 1)
-            setItem({...item, Count: item.Count + 1, price: (item.price / item.Count) * (item.Count + 1)});
+            setItem({...item, Count: item.Count + 1, Price: (item.Price / item.Count) * (item.Count + 1)});
     }
     const selectitem = () => {
         setselect(!select);
     }
     const deleteitem = () => {
+        setFstate(!fstate);
         // DeleteFruit(item)
         // .then(e => {
         //     console.log(e);
@@ -31,6 +33,7 @@ function EachItem(props){
     }
     return (
         <StyledEachItem>
+            {!fstate ? (
         <div className="content">
             <ul className="incartlist">
                 <li>
@@ -51,10 +54,11 @@ function EachItem(props){
                             <span className="selling" style={{border: '0'}}>{item.Price}원</span>
                         </div>     
                     </div>
-                    <button type="button" className="btn_delete"><DeleteIcon onClick={deleteitem()}/></button>
+                    <button type="button" className="btn_delete"><DeleteIcon onClick={()=>deleteitem()}/></button>
                 </li>
             </ul>
         </div>
+        ): null}
         </StyledEachItem>
     );
 }

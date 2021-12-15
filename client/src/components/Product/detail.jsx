@@ -6,22 +6,16 @@ import { Link } from "react-router-dom"
 import { AddFriut } from '../../action/carts';
 import { useCookies } from 'react-cookie';
 import Comment from './comment';
+import fruits from '../../api/detail';
 
 const ProductDetail = () => {
     const [cookies] = useCookies(['userid'])
     const navigate = useNavigate();
     const itemno = useParams();
-    const [item, setItem] = useState({
-        fno: 0,
-        fname: "",
-        fimage: "",
-        Price: 0,
-        Count: 0,
-        Expiration_date: "",
-    });
+    const [item, setItem] = useState(fruits);
 
     useEffect(()=>{
-        getItemInfo();
+        // getItemInfo();
     }, []);
 
     const getItemInfo = async () => {
@@ -70,7 +64,7 @@ const ProductDetail = () => {
             </div>
             <div className="items_info">
                 <p className="items_name">
-                    <strong className="name">이름{item.fname}</strong>
+                    <strong className="name">{item.fname}</strong>
                 </p>
                 <dl className="list fst">
                     <dt className="tit">가격</dt>

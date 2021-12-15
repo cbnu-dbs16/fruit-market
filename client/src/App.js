@@ -23,30 +23,30 @@ import { useCookies } from 'react-cookie';
 
 function App() {
   const [activeNav, setActiveNav] = useState(1);
-  const [cookies, removeCookie] = useCookies(['userid'])
+  // const [cookies, removeCookie] = useCookies(['userid'])
   const [hasCookie, setHasCookie] = useState(false)
   const handlelogout = async () => {
-    removeCookie('userid');
+    // removeCookie('userid');
     await setHasCookie(false);
   }
 
-  useEffect(() => {
-    if (cookies.userid && cookies.userid !== 'undefined') {
-      setHasCookie(true)
-    } else {
-      setHasCookie(false)
-    }
-    console.log(hasCookie);
-  }, [cookies])
+  // useEffect(() => {
+  //   if (cookies.userid && cookies.userid !== 'undefined') {
+  //     setHasCookie(true)
+  //   } else {
+  //     setHasCookie(false)
+  //   }
+  //   console.log(hasCookie);
+  // }, [cookies])
 
   return (
     <StyledApp>
       <BrowserRouter>    
       <div className="App">
         <div className="header">
-          <img src="mainlogo.png" className="logo_area" width={150} height={55} alt="logo"/>
+          <img src="https://user-images.githubusercontent.com/63364990/146056495-8efb2b89-bb63-49a3-92c7-a3fb1d5283c5.png" className="logo_area" width={150} height={55} alt="logo"/>
           <div className="account">
-          {!hasCookie ? 
+          {/* {!hasCookie ?  */}
             <ul className="list_menu">
               <li class="menu menu_join">
                 <Link to="register" style={{padding: '0 11px 0 11px', color: '#5f0080'}}>회원가입</Link>
@@ -58,7 +58,7 @@ function App() {
                 <a href="#" style={{padding: '0 11px 0 11px'}}>고객센터</a>
               </li>
             </ul>
-            : 
+            {/* : 
             <ul className="list_menu">
               <li class="menu menu_login">
                 <a onClick={handlelogout()} style={{padding: '0 11px 0 11px'}}>로그아웃</a>
@@ -66,7 +66,7 @@ function App() {
               <li class="menu menu_center">
                 <a href="#" style={{padding: '0 11px 0 11px'}}>고객센터</a>
               </li>
-            </ul>}
+            </ul> */}
           </div>
         </div>
         <div className="gnb">

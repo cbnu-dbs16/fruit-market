@@ -5,7 +5,7 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { AddFriut } from '../../action/carts';
 import { Link } from "react-router-dom";
 import { useCookies } from 'react-cookie';
-import cus_id from "../../__mocks__/user";
+import cus_id from "../../api/user";
 
 function Optionitem(props){
     const [item, setItem] = useState(props.item);

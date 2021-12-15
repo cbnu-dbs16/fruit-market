@@ -130,7 +130,7 @@ export const StyledDetail = styled.div`
   }
   tr.commentinfo{
     margin: 15px 0;
-    height: 200px;
+    height: 50px;
     // background : black;
   }
 `

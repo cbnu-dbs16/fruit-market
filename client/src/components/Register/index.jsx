@@ -125,7 +125,7 @@ const Register = () => {
         {isOpenPost ? (<DaumPostcode style={postCodeStyle} autoClose onComplete={onCompletePost} />): null}
       </div>
       <FormControl sx={{ m: '15px 0px', width: '100%' }} variant="standard">
-        <Button type="submit" variant="contained" className={btnstyle.btn } onClick={()=>navigate('/product', { replace: true })}>회원가입</Button>
+        <Button type="submit" variant="contained" className={btnstyle.btn } onClick={()=>navigate('/login', { replace: true })}>회원가입</Button>
       </FormControl>
       </form>
     </div>

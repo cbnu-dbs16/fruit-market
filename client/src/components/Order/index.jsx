@@ -6,16 +6,16 @@ import StyledOrder from "./style";
 const Order = () => {
     const [orderitem, setOrderItem] = useState([]);
 
-    useEffect(()=>{
-        BringOrderlist()
-        .then(data => {
-            console.log(data);
-            setOrderItem(data);
-        })
-        .catch(e => {
-            console.log(e);
-        })
-    })
+    // useEffect(()=>{
+    //     BringOrderlist()
+    //     .then(data => {
+    //         console.log(data);
+    //         setOrderItem(data);
+    //     })
+    //     .catch(e => {
+    //         console.log(e);
+    //     })
+    // }, [])
 
     const handleOrder = () => {
         alert('주문이 완료되었습니다.');
@@ -29,8 +29,8 @@ const Order = () => {
                 <h3>주문상품</h3>
                 <div className="order_goodslist">
                     <div className="info_product">
-                        {/* {orderitem[0].fname} */}
-                        <span className="num">외 {orderitem.length}개</span>상품을 주문합니다.
+                        유명산지 머스크 멜론
+                        <span className="num">외 3개</span>상품을 주문합니다.
                     </div>
                 </div>
             </div>
@@ -89,7 +89,7 @@ const Order = () => {
                 borderRadius: '3px',
                 color: 'white',
                 fontSize: '16px',
-                padding: '16px 100px'}}>{orderitem.reduce((acc, cur) => {
+                padding: '16px 100px'}}>93,20{orderitem.reduce((acc, cur) => {
                     return acc + cur.Price;
                 }, 0)}원 결제하기</button>
             </div>
